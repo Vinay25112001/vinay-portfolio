@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinay Kumar Reddy Sirigireddy — Aerospace Systems Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#030810; --bg2:#060E1C; --panel:#0A1628; --panel2:#0D1E34;
+  --border:#1A3055; --border2:#0F2040;
+  --cyan:#00D4FF; --cyan2:#00A8CC; --orange:#FF6B35;
+  --green:#00FF9D; --amber:#FFB800; --red:#FF3D5A;
+  --text:#D4E6F9; --muted:#5A7A9A; --dim:#2A4060; --white:#F0F8FF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--cyan2);border-radius:2px;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);pointer-events:none;z-index:1;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,8,16,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);}
+.nav-logo{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:.15em;text-decoration:none;}
+.nav-logo span{color:var(--orange);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .2s;}
+.nav-links a:hover{color:var(--cyan);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-status{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green);letter-spacing:.1em;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:0 10vw;overflow:hidden;}
+.hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px;animation:fadeUp .8s ease both;}
+.hero-eyebrow::before{content:'[ ';}
+.hero-eyebrow::after{content:' ]';}
+.hero-name{font-family:'Orbitron',sans-serif;font-size:clamp(34px,5.5vw,76px);font-weight:900;line-height:1.0;letter-spacing:.02em;color:var(--white);margin-bottom:8px;animation:fadeUp .8s .15s ease both;}
+.hero-name .first{display:block;}
+.hero-name .last{color:var(--cyan);display:block;}
+.hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(14px,2vw,22px);font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:26px;animation:fadeUp .8s .28s ease both;}
+.hero-desc{font-size:15px;color:var(--text);max-width:540px;line-height:1.85;margin-bottom:38px;animation:fadeUp .8s .4s ease both;}
+.hero-desc strong{color:var(--cyan);}
+.hero-stats{display:flex;gap:32px;margin-bottom:42px;animation:fadeUp .8s .52s ease both;}
+.hero-stat-val{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--cyan);line-height:1;}
+.hero-stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:4px;}
+.hero-divider{width:1px;background:var(--border);align-self:stretch;}
+.hero-ctas{display:flex;gap:16px;animation:fadeUp .8s .64s ease both;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:var(--cyan);color:#030810;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all .2s;}
+.btn-primary:hover{background:var(--white);transform:translateY(-2px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:12px 26px;background:transparent;color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border:1px solid var(--cyan);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all .2s;}
+.btn-secondary:hover{background:rgba(0,212,255,.08);transform:translateY(-2px);}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;animation:fadeUp 1s 1.2s ease both;}
+.scroll-arrow{width:20px;height:30px;border:1px solid var(--border);border-radius:10px;position:relative;}
+.scroll-arrow::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--cyan);animation:scrollDot 1.8s infinite;}
+@keyframes scrollDot{0%{top:6px;opacity:1;}80%{top:18px;opacity:0;}100%{top:6px;opacity:0;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:.9;}}
+
+/* RADAR */
+.radar-wrap{position:absolute;right:8vw;top:50%;transform:translateY(-50%);width:400px;height:400px;animation:fadeIn 1.5s .5s ease both;}
+
+/* SECTIONS */
+section{position:relative;z-index:2;padding:96px 10vw;}
+.section-eyebrow{display:flex;align-items:center;gap:12px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px;}
+.section-eyebrow::before{content:'';width:36px;height:1px;background:var(--cyan);}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:48px;}
+.section-title span{color:var(--cyan);}
+
+/* ABOUT */
+#about{background:var(--bg2);}
+#about .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.about-text p{font-size:15px;color:var(--text);line-height:1.9;margin-bottom:16px;}
+.about-text p strong{color:var(--cyan);font-weight:600;}
+.highlight-box{margin-top:26px;padding:16px 20px;border-left:3px solid var(--cyan);background:rgba(0,212,255,.04);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9;letter-spacing:.05em;}
+.about-panels{display:flex;flex-direction:column;gap:14px;}
+.info-panel{background:var(--panel);border:1px solid var(--border2);border-top:2px solid var(--cyan);padding:18px 22px;position:relative;overflow:hidden;}
+.info-panel::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;background:linear-gradient(225deg,rgba(0,212,255,.06),transparent);}
+.info-panel-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px;}
+.info-panel-value{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:var(--white);line-height:1.1;}
+.info-panel-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+.corner-tl,.corner-br{position:absolute;width:18px;height:18px;}
+.corner-tl{top:10px;left:10px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.corner-br{bottom:10px;right:10px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+
+/* SKILLS */
+#skills{background:var(--bg);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.skill-category{background:var(--panel);border:1px solid var(--border2);padding:22px;position:relative;overflow:hidden;}
+.skill-category::after{content:attr(data-num);position:absolute;right:12px;bottom:8px;font-family:'Orbitron',sans-serif;font-size:44px;font-weight:900;color:rgba(0,212,255,.04);letter-spacing:-.05em;}
+.skill-category-title{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;padding-bottom:9px;border-bottom:1px solid var(--border2);}
+.skill-bar-wrap{margin-bottom:12px;}
+.skill-bar-header{display:flex;justify-content:space-between;font-size:12px;color:var(--text);margin-bottom:5px;}
+.skill-bar-pct{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);}
+.skill-bar-bg{height:3px;background:var(--border);position:relative;overflow:hidden;}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan2),var(--cyan));position:relative;width:0;transition:width 1.4s ease;}
+.skill-bar-fill.animated{width:var(--w);}
+.skill-bar-fill::after{content:'';position:absolute;right:0;top:0;width:4px;height:100%;background:white;opacity:.8;box-shadow:0 0 6px var(--cyan);}
+.tech-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tech-tag{padding:5px 10px;border:1px solid var(--border);background:var(--bg2);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.08em;transition:all .2s;}
+.tech-tag:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05);}
+
+/* EXPERIENCE */
+#experience{background:var(--bg2);}
+.timeline{position:relative;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--cyan),var(--border),transparent);}
+.timeline-item{padding:0 0 50px 42px;position:relative;}
+.timeline-dot{position:absolute;left:-7px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 12px rgba(0,212,255,.4);}
+.timeline-dot.active{background:var(--cyan);animation:dotPulse 2.5s infinite;}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 8px rgba(0,212,255,.4);}50%{box-shadow:0 0 20px rgba(0,212,255,.9);}}
+.timeline-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+.timeline-role{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:var(--white);letter-spacing:.04em;}
+.timeline-period{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.1em;white-space:nowrap;padding:4px 10px;border:1px solid rgba(255,107,53,.3);background:rgba(255,107,53,.05);}
+.timeline-org{font-size:12px;color:var(--cyan);margin-bottom:14px;font-weight:600;letter-spacing:.08em;}
+.timeline-bullets{list-style:none;}
+.timeline-bullets li{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:7px;padding-left:18px;position:relative;}
+.timeline-bullets li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:10px;top:3px;}
+.timeline-bullets li strong{color:var(--text);}
+
+/* PROJECTS */
+#projects{background:var(--bg);}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.project-card{background:var(--panel);border:1px solid var(--border2);padding:26px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;cursor:default;}
+.project-card:hover{transform:translateY(-6px);border-color:var(--cyan);}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .3s;}
+.project-card:hover::before{opacity:1;}
+.project-card-num{font-family:'Orbitron',sans-serif;font-size:10px;color:var(--border);letter-spacing:.2em;margin-bottom:12px;}
+.project-card-title{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);margin-bottom:11px;line-height:1.45;}
+.project-card-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:18px;}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.project-tag{padding:3px 9px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:.08em;}
+.project-card.featured{grid-column:span 2;background:linear-gradient(135deg,var(--panel),var(--panel2));border-color:rgba(0,212,255,.2);}
+.project-card.featured .project-card-title{font-size:15px;}
+.project-featured-badge{display:inline-block;margin-bottom:10px;padding:3px 10px;background:var(--orange);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;}
+
+/* EDUCATION */
+#education{background:var(--bg2);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.edu-card{background:var(--panel);border:1px solid var(--border2);border-left:3px solid var(--cyan);padding:26px 30px;position:relative;}
+.edu-degree{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);margin-bottom:6px;line-height:1.4;}
+.edu-uni{font-size:13px;color:var(--cyan);margin-bottom:4px;font-weight:600;}
+.edu-date{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:14px;}
+.edu-gpa{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(0,255,157,.06);border:1px solid rgba(0,255,157,.2);font-family:'Orbitron',sans-serif;font-size:13px;color:var(--green);}
+.edu-bullets{margin-top:14px;list-style:none;}
+.edu-bullets li{font-size:13px;color:var(--muted);line-height:1.7;padding-left:16px;position:relative;margin-bottom:4px;}
+.edu-bullets li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:10px;top:3px;}
+
+/* CERTS */
+#certifications{background:var(--bg);}
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.cert-card{background:var(--panel);border:1px solid var(--border2);padding:18px;text-align:center;transition:all .25s;position:relative;overflow:hidden;}
+.cert-card:hover{border-color:var(--amber);background:var(--panel2);}
+.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transition:transform .25s;}
+.cert-card:hover::before{transform:scaleX(1);}
+.cert-icon{font-size:24px;margin-bottom:9px;}
+.cert-name{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:4px;}
+.cert-issuer{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:.12em;}
+
+/* CONTACT */
+#contact{background:var(--bg2);text-align:center;}
+.contact-inner{max-width:640px;margin:0 auto;}
+.contact-tagline{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:46px;}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:56px;}
+.contact-link{display:flex;align-items:center;gap:10px;padding:13px 22px;border:1px solid var(--border);background:var(--panel);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text);text-decoration:none;letter-spacing:.07em;transition:all .2s;}
+.contact-link:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05);transform:translateY(-3px);}
+.contact-link-icon{font-size:15px;}
+.footer-line{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.14em;border-top:1px solid var(--border2);padding-top:26px;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:12px 20px;}
+  .nav-links{display:none;}
+  section{padding:68px 5vw;}
+  #about .grid,.edu-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .project-card.featured{grid-column:span 1;}
+  .cert-grid{grid-template-columns:repeat(2,1fr);}
+  .radar-wrap{display:none;}
+  .hero-stats{gap:18px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">VKR<span>S</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    OPEN TO OPPORTUNITIES
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div style="position:relative;z-index:3;max-width:600px;">
+    <div class="hero-eyebrow">Aerospace Systems Engineer &nbsp;·&nbsp; Fairborn, OH</div>
+    <h1 class="hero-name">
+      <span class="first">VINAY KUMAR</span>
+      <span class="last">SIRIGIREDDY</span>
+    </h1>
+    <div class="hero-title">Graduate Research Assistant · Wright State University</div>
+    <p class="hero-desc">
+      Specializing in <strong>MBSE-driven eVTOL design</strong>, multidisciplinary aircraft sizing, and computational aerodynamics. Bridging MATLAB, SysML, and OpenVSP to advance the next generation of Advanced Air Mobility.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-val">3.7</div>
+        <div class="hero-stat-label">M.S. GPA</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div>
+        <div class="hero-stat-val">2+</div>
+        <div class="hero-stat-label">Years Research</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div>
+        <div class="hero-stat-val">10+</div>
+        <div class="hero-stat-label">Tools & Platforms</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div>
+        <div class="hero-stat-val">AAM</div>
+        <div class="hero-stat-label">Focus Domain</div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">✉ GET IN TOUCH</a>
+      <a href="#projects" class="btn-secondary">◈ MY PROJECTS</a>
+    </div>
+  </div>
+
+  <!-- RADAR ANIMATION -->
+  <div class="radar-wrap">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+      <circle cx="200" cy="200" r="178" fill="none" stroke="#00D4FF" stroke-width="0.5" opacity="0.25"/>
+      <circle cx="200" cy="200" r="133" fill="none" stroke="#00D4FF" stroke-width="0.5" opacity="0.2"/>
+      <circle cx="200" cy="200" r="89" fill="none" stroke="#00D4FF" stroke-width="0.5" opacity="0.2"/>
+      <circle cx="200" cy="200" r="44" fill="none" stroke="#00D4FF" stroke-width="0.5" opacity="0.3"/>
+      <line x1="200" y1="22" x2="200" y2="378" stroke="#00D4FF" stroke-width="0.4" opacity="0.12"/>
+      <line x1="22" y1="200" x2="378" y2="200" stroke="#00D4FF" stroke-width="0.4" opacity="0.12"/>
+      <line x1="74" y1="74" x2="326" y2="326" stroke="#00D4FF" stroke-width="0.4" opacity="0.08"/>
+      <line x1="326" y1="74" x2="74" y2="326" stroke="#00D4FF" stroke-width="0.4" opacity="0.08"/>
+      <defs>
+        <radialGradient id="sweepGrad" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <path id="sweepWedge" fill="url(#sweepGrad)" opacity="0.7"/>
+      <!-- Blips -->
+      <circle cx="262" cy="128" r="4" fill="#00FF9D" opacity="0.9"><animate attributeName="opacity" values="0.9;0.1;0.9" dur="2.1s" repeatCount="indefinite"/></circle>
+      <circle cx="143" cy="278" r="3" fill="#FF6B35" opacity="0.8"><animate attributeName="opacity" values="0.8;0.1;0.8" dur="3.3s" repeatCount="indefinite"/></circle>
+      <circle cx="312" cy="258" r="2.5" fill="#00D4FF" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="2.7s" repeatCount="indefinite"/></circle>
+      <circle cx="108" cy="152" r="3" fill="#FFB800" opacity="0.7"><animate attributeName="opacity" values="0.7;0.1;0.7" dur="1.9s" repeatCount="indefinite"/></circle>
+      <!-- Crosshair -->
+      <circle cx="200" cy="200" r="6" fill="none" stroke="#00D4FF" stroke-width="1.5"/>
+      <line x1="195" y1="200" x2="205" y2="200" stroke="#00D4FF" stroke-width="1.5"/>
+      <line x1="200" y1="195" x2="200" y2="205" stroke="#00D4FF" stroke-width="1.5"/>
+      <text x="200" y="14" text-anchor="middle" fill="#1A3055" font-size="8" font-family="Share Tech Mono,monospace">N 000°</text>
+      <text x="386" y="204" fill="#1A3055" font-size="8" font-family="Share Tech Mono,monospace">090°</text>
+      <text x="200" y="396" text-anchor="middle" fill="#1A3055" font-size="8" font-family="Share Tech Mono,monospace">S 180°</text>
+      <text x="4" y="204" fill="#1A3055" font-size="8" font-family="Share Tech Mono,monospace">270°</text>
+    </svg>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+    SCROLL DOWN
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow">01 // About</div>
+  <h2 class="section-title">Engineer. <span>Researcher.</span> Builder.</h2>
+  <div class="grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>Graduate Research Assistant</strong> at Wright State University's Aerospace Systems Engineering program, working under Dean Darryl Ahner on cutting-edge eVTOL development within a <strong>Model-Based Systems Engineering (MBSE) framework</strong>.</p>
+      <p>My work sits at the intersection of <strong>computational aircraft design, multidisciplinary optimization, and digital engineering</strong> — building the tools and methodologies that enable next-generation Advanced Air Mobility. I integrate MATLAB sizing physics, SysML system architecture, and OpenVSP geometry generation into coherent, traceable design workflows.</p>
+      <p>From hover rotor analysis and battery energy budgets to fuselage structural layouts and V-tail authority checks, I build end-to-end parametric tools that close the loop between early concept and physics-validated design.</p>
+      <div class="highlight-box">
+        <div>▸ CO-AUTHORING: AIAA Journal of Aircraft — Integrated eVTOL Sizing Frameworks</div>
+        <div style="margin-top:6px">▸ BUILT: Full eVTOL sizing app — 10 analysis tabs, PDF report, OpenVSP export</div>
+        <div style="margin-top:6px">▸ PUBLISHED: Hoverbike propulsion research — IJISRT Journal</div>
+      </div>
+    </div>
+    <div class="about-panels">
+      <div class="info-panel reveal reveal-delay-1">
+        <div class="corner-tl"></div>
+        <div class="info-panel-label">Current Position</div>
+        <div class="info-panel-value" style="font-size:15px;line-height:1.45">Graduate Research Assistant</div>
+        <div class="info-panel-sub">Wright State University · Feb 2024 – Present</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;" class="reveal reveal-delay-2">
+        <div class="info-panel">
+          <div class="info-panel-label">M.S. GPA</div>
+          <div class="info-panel-value">3.7</div>
+          <div class="info-panel-sub">Aerospace Systems Eng.</div>
+        </div>
+        <div class="info-panel">
+          <div class="info-panel-label">Expected</div>
+          <div class="info-panel-value" style="font-size:16px">May 2026</div>
+          <div class="info-panel-sub">Graduate Degree</div>
+        </div>
+      </div>
+      <div class="info-panel reveal reveal-delay-3">
+        <div class="info-panel-label">Research Domain</div>
+        <div class="info-panel-value" style="font-size:14px;line-height:1.5">eVTOL · AAM · MBSE<br>Computational Aircraft Design</div>
+      </div>
+      <div class="info-panel reveal reveal-delay-4" style="border-top-color:var(--orange)">
+        <div class="info-panel-label">Languages</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+          <span class="tech-tag">English</span><span class="tech-tag">Hindi</span>
+          <span class="tech-tag">Telugu</span><span class="tech-tag">Tamil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow">02 // Technical Skills</div>
+  <h2 class="section-title">Technical <span>Arsenal</span></h2>
+  <div class="skills-grid">
+    <div class="skill-category reveal" data-num="01">
+      <div class="skill-category-title">⬡ MBSE & Programming</div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CATIA Magic / SysML</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:90%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>MATLAB / Aircraft Sizing</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>Python / Data Science</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>React / Web App Dev</span><span class="skill-bar-pct">76%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:76%"></div></div></div>
+    </div>
+    <div class="skill-category reveal reveal-delay-1" data-num="02">
+      <div class="skill-category-title">✦ Aerospace Analysis</div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>OpenVSP — Parametric Geometry</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>Aerodynamics & Performance</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:90%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CFD (Cradle / Ansys)</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>XFOIL / Airfoil Analysis</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+    </div>
+    <div class="skill-category reveal reveal-delay-2" data-num="03">
+      <div class="skill-category-title">◈ CAD & Structural</div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>SOLIDWORKS (CSWP)</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CATIA V5</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:82%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>HyperMesh / FEA</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>AutoCAD / Fusion 360</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
+    </div>
+    <div class="skill-category reveal reveal-delay-3" data-num="04">
+      <div class="skill-category-title">⚡ Propulsion & Energy</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Actuator Disk Theory</span><span class="tech-tag">Battery Sizing</span>
+        <span class="tech-tag">eVTOL Hover Power</span><span class="tech-tag">NASA CEA</span>
+        <span class="tech-tag">Ion Thrusters</span><span class="tech-tag">Hybrid Propulsion</span>
+        <span class="tech-tag">Specific Impulse</span><span class="tech-tag">O/F Analysis</span>
+        <span class="tech-tag">PMSM Motor Sizing</span><span class="tech-tag">Rotor Blade Design</span>
+      </div>
+    </div>
+    <div class="skill-category reveal reveal-delay-4" data-num="05">
+      <div class="skill-category-title">🛰 Mission & Systems</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Systems Tool Kit (STK)</span><span class="tech-tag">Orbit Modeling</span>
+        <span class="tech-tag">Mission Energy Budgets</span><span class="tech-tag">Range-Payload</span>
+        <span class="tech-tag">V-n Diagrams</span><span class="tech-tag">CG Envelope</span>
+        <span class="tech-tag">Static Margin</span><span class="tech-tag">V-Tail Sizing</span>
+        <span class="tech-tag">Raymer Methods</span><span class="tech-tag">NDARC</span>
+      </div>
+    </div>
+    <div class="skill-category reveal reveal-delay-2" data-num="06">
+      <div class="skill-category-title">◐ Research & Soft Skills</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Technical Writing</span><span class="tech-tag">AIAA Publication</span>
+        <span class="tech-tag">Trade Study Design</span><span class="tech-tag">MDO</span>
+        <span class="tech-tag">Design Reviews</span><span class="tech-tag">Conceptual Sizing</span>
+        <span class="tech-tag">PLM Workflows</span><span class="tech-tag">ASME Member</span>
+        <span class="tech-tag">Team Leadership</span><span class="tech-tag">Cross-functional Collab</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">03 // Experience</div>
+  <h2 class="section-title">Professional <span>Experience</span></h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot active"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Graduate Research Assistant</div>
+          <div class="timeline-org">Wright State University — Dayton, OH</div>
+        </div>
+        <div class="timeline-period">FEB 2024 — PRESENT</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Developed an integrated <strong>MATLAB–MBSE framework</strong> to automate preliminary weight, power, and energy estimation for eVTOL aircraft concepts.</li>
+        <li>Linked high-fidelity numerical scripts with <strong>CATIA Magic SysML</strong> to track Technical Performance Measures (TPMs) across iterative design phases.</li>
+        <li>Built a <strong>10-tab interactive eVTOL sizing web application</strong> with real-time physics engine, drag buildup, stability analysis, V-tail sizing, OpenVSP export, and PDF report generation — deployed to GitHub Pages.</li>
+        <li>Generated <strong>parametric aircraft geometries in OpenVSP</strong> to extract aerodynamic inputs for sizing trade studies — validated against Joby S4, Archer Midnight, and NASA NDARC benchmarks.</li>
+        <li>Built system architectures using MBSE to evaluate <strong>propulsion–battery–flight control interactions</strong> and identify single-point failures.</li>
+        <li>Co-authoring a research manuscript on integrated sizing frameworks for the <strong>AIAA Journal of Aircraft</strong>.</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Advanced Rocket Propulsion Intern</div>
+          <div class="timeline-org">MARS Exploration Pvt. Ltd.</div>
+        </div>
+        <div class="timeline-period">MAY 2021 — DEC 2021</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Investigated <strong>ion thrusters and hybrid propulsion</strong> concepts using NASA CEA to evaluate specific impulse (Isp) and combustion performance.</li>
+        <li>Performed theoretical studies on liquid propellant combinations (RP-1/Al + LOX) by varying O/F ratios — identified optimal range with ~12% efficiency improvement.</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Systems Tool Kit (STK) Intern</div>
+          <div class="timeline-org">SS Technologies</div>
+        </div>
+        <div class="timeline-period">AUG 2020 — JAN 2021</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Modeled <strong>satellite orbits and aircraft trajectories in STK</strong> to evaluate mission performance under environmental and operational constraints.</li>
+        <li>Analyzed trajectory optimization scenarios for multi-vehicle mission planning with coverage analysis outputs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow">04 // Projects</div>
+  <h2 class="section-title">Project <span>Portfolio</span></h2>
+  <div class="projects-grid">
+    <div class="project-card featured reveal">
+      <div class="corner-tl"></div><div class="corner-br"></div>
+      <div class="project-featured-badge">★ Flagship Project</div>
+      <div class="project-card-num">PROJECT 01</div>
+      <div class="project-card-title">MBSE-Integrated eVTOL Sizing Framework & Web Application</div>
+      <div class="project-card-desc">Full-stack eVTOL conceptual sizing platform with 10 analysis modules — from ISA atmosphere modeling to convergence plots and OpenVSP geometry export. Physics validated against Joby S4, Archer Midnight, and NASA NDARC benchmarks. Features PDF report generation with LaTeX equations, wing planform visualization, CG travel envelope, V-tail ruddervator deflection analysis, and live Raymer drag buildup. Deployed to GitHub Pages.</div>
+      <div class="project-tags">
+        <span class="project-tag">MATLAB</span><span class="project-tag">React / JSX</span>
+        <span class="project-tag">OpenVSP</span><span class="project-tag">MBSE</span>
+        <span class="project-tag">AIAA Journal</span><span class="project-tag">Raymer Methods</span>
+        <span class="project-tag">NDARC Validation</span>
+      </div>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-card-num">PROJECT 02</div>
+      <div class="project-card-title">Hoverbike Propulsion CFD & Propeller Design</div>
+      <div class="project-card-desc">Conducted CFD using Cradle CFD to evaluate aerodynamic interference and thrust efficiency of overlapped propeller configurations. Designed 2-bladed and toroidal propellers in SOLIDWORKS; quantified thrust-to-power trade-offs for AAM applications.</div>
+      <div class="project-tags"><span class="project-tag">Cradle CFD</span><span class="project-tag">SOLIDWORKS</span><span class="project-tag">Thrust Analysis</span><span class="project-tag">AAM</span></div>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-card-num">PROJECT 03</div>
+      <div class="project-card-title">FEA — Hoverbike Duct Structural Optimization</div>
+      <div class="project-card-desc">Performed FEA using HyperMesh to assess structural integrity under flight loads. Evaluated carbon fiber composites vs. 6-series aluminum to reduce weight while maintaining required safety factors.</div>
+      <div class="project-tags"><span class="project-tag">HyperMesh</span><span class="project-tag">FEA</span><span class="project-tag">Carbon Fiber</span><span class="project-tag">Weight Reduction</span></div>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-card-num">PROJECT 04</div>
+      <div class="project-card-title">Solid Propellant Combustion Analysis (NASA CEA)</div>
+      <div class="project-card-desc">Simulated combustion performance of AP/Al propellants using NASA CEA. Conducted sensitivity analysis on O/F ratios, identifying optimal range (1.5–2.0) with ~12% efficiency improvement over baseline.</div>
+      <div class="project-tags"><span class="project-tag">NASA CEA</span><span class="project-tag">AP/Al Propellant</span><span class="project-tag">O/F Optimization</span><span class="project-tag">Isp Analysis</span></div>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-card-num">PROJECT 05</div>
+      <div class="project-card-title">Full-Scale Hoverbike Design & Fabrication (Published)</div>
+      <div class="project-card-desc">Lead Designer and Team Lead for a full-scale hoverbike prototype with overlapping propeller configuration. Performed aerodynamic and propulsion calculations; published results in IJISRT journal.</div>
+      <div class="project-tags"><span class="project-tag">Lead Designer</span><span class="project-tag">Fabrication</span><span class="project-tag">IJISRT Published</span><span class="project-tag">Propulsion</span></div>
+    </div>
+    <div class="project-card reveal reveal-delay-3">
+      <div class="project-card-num">PROJECT 06</div>
+      <div class="project-card-title">20-Seater Business Jet — Capstone Design</div>
+      <div class="project-card-desc">Executed full conceptual sizing, configuration layout, and preliminary structural design benchmarked against the Gulfstream G500 — covering aerodynamics, propulsion selection, and weight estimation.</div>
+      <div class="project-tags"><span class="project-tag">Conceptual Design</span><span class="project-tag">Gulfstream G500</span><span class="project-tag">Weight Sizing</span><span class="project-tag">Config Layout</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-eyebrow">05 // Education</div>
+  <h2 class="section-title">Academic <span>Credentials</span></h2>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="corner-tl"></div>
+      <div class="edu-degree">Master of Science — Aerospace Systems Engineering</div>
+      <div class="edu-uni">Wright State University · Dayton, OH</div>
+      <div class="edu-date">EXPECTED: MAY 2026</div>
+      <div class="edu-gpa">GPA : <strong>3.7 / 4.0</strong></div>
+      <ul class="edu-bullets">
+        <li>Graduate Research Assistant under Dean Darryl Ahner</li>
+        <li>Research focus: eVTOL development via MBSE framework</li>
+        <li>Co-authoring AIAA Journal of Aircraft manuscript</li>
+      </ul>
+    </div>
+    <div class="edu-card reveal reveal-delay-1" style="border-left-color:var(--orange)">
+      <div class="edu-degree">Bachelor of Science — Aeronautical Engineering</div>
+      <div class="edu-uni">Bharath University</div>
+      <div class="edu-date">GRADUATED: MAY 2023</div>
+      <div class="edu-gpa" style="border-color:rgba(255,107,53,.3);color:var(--orange)">GPA : <strong>3.5 / 4.0</strong></div>
+      <ul class="edu-bullets">
+        <li>Capstone: 20-Seater Business Jet conceptual design</li>
+        <li>Published hoverbike research in IJISRT</li>
+        <li>Lead Designer on full-scale prototype build</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="padding-top:80px;padding-bottom:80px;">
+  <div class="section-eyebrow">06 // Certifications</div>
+  <h2 class="section-title">Certifications & <span>Qualifications</span></h2>
+  <div class="cert-grid">
+    <div class="cert-card reveal"><div class="cert-icon">⚙️</div><div class="cert-name">SOLIDWORKS Professional</div><div class="cert-issuer">CSWP · Dassault Systèmes</div></div>
+    <div class="cert-card reveal reveal-delay-1"><div class="cert-icon">✏️</div><div class="cert-name">SOLIDWORKS Drawing Tools Professional</div><div class="cert-issuer">CSWDP · Dassault Systèmes</div></div>
+    <div class="cert-card reveal reveal-delay-2"><div class="cert-icon">🖨️</div><div class="cert-name">Additive Manufacturing Associate</div><div class="cert-issuer">CSWA-AM · Dassault Systèmes</div></div>
+    <div class="cert-card reveal reveal-delay-3"><div class="cert-icon">🔷</div><div class="cert-name">3D Swym Associate</div><div class="cert-issuer">Dassault Systèmes</div></div>
+    <div class="cert-card reveal"><div class="cert-icon">🐍</div><div class="cert-name">Python for Data Science & AI</div><div class="cert-issuer">IBM</div></div>
+    <div class="cert-card reveal reveal-delay-1"><div class="cert-icon">✈️</div><div class="cert-name">Aircraft Performance</div><div class="cert-issuer">NPTEL</div></div>
+    <div class="cert-card reveal reveal-delay-2"><div class="cert-icon">🔢</div><div class="cert-name">MATLAB Certified</div><div class="cert-issuer">MathWorks</div></div>
+    <div class="cert-card reveal reveal-delay-3"><div class="cert-icon">🛰</div><div class="cert-name">Systems Tool Kit (STK)</div><div class="cert-issuer">SS Technologies</div></div>
+    <div class="cert-card reveal"><div class="cert-icon">📐</div><div class="cert-name">AutoCAD Certified</div><div class="cert-issuer">Verzeo</div></div>
+    <div class="cert-card reveal reveal-delay-1"><div class="cert-icon">🏭</div><div class="cert-name">Manufacturing Process Technology I & II</div><div class="cert-issuer">NPTEL</div></div>
+    <div class="cert-card reveal reveal-delay-2"><div class="cert-icon">🎯</div><div class="cert-name">Product Development & Systems Engineering</div><div class="cert-issuer">Udemy</div></div>
+    <div class="cert-card reveal reveal-delay-3"><div class="cert-icon">🔩</div><div class="cert-name">SOLIDWORKS Associate</div><div class="cert-issuer">CSWA · Dassault Systèmes</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">07 // Contact</div>
+  <h2 class="section-title" style="margin-bottom:18px">Get In <span>Touch</span></h2>
+  <div class="contact-inner">
+    <p class="contact-tagline reveal">Open to research collaborations, full-time aerospace engineering roles, and Advanced Air Mobility / eVTOL design opportunities. Let's build the future of flight together.</p>
+    <div class="contact-links reveal reveal-delay-1">
+      <a href="mailto:sirigireddyvinaykumarreddy@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span> sirigireddyvinaykumarreddy@gmail.com
+      </a>
+      <a href="tel:9375163412" class="contact-link">
+        <span class="contact-link-icon">📞</span> (937) 516-3412
+      </a>
+      <a href="https://www.linkedin.com/in/vinay-kumar-reddy-sirigireddy-ba98a82ba" target="_blank" class="contact-link">
+        <span class="contact-link-icon">🔗</span> LinkedIn Profile
+      </a>
+      <a href="https://vinay25112001.github.io/evtol-sizing-app-Wright-State-University/" target="_blank" class="contact-link" style="border-color:var(--cyan);color:var(--cyan)">
+        <span class="contact-link-icon">🚀</span> Live eVTOL Tool
+      </a>
+    </div>
+    <div class="footer-line reveal reveal-delay-2">
+      VINAY KUMAR REDDY SIRIGIREDDY · AEROSPACE SYSTEMS ENGINEER · WRIGHT STATE UNIVERSITY · 2026
+      <br><span style="color:var(--border)">&nbsp;// MBSE · eVTOL · AAM · MATLAB · SysML · OpenVSP</span>
+    </div>
+  </div>
+</section>
+
+<script>
+// Radar sweep
+(function(){
+  const wedge=document.getElementById('sweepWedge');
+  if(!wedge)return;
+  let angle=0;
+  function frame(){
+    angle=(angle+1.2)%360;
+    const r=178,cx=200,cy=200;
+    const a1=angle*Math.PI/180;
+    const a2=(angle-60)*Math.PI/180;
+    const x1=cx+r*Math.sin(a1), y1=cy-r*Math.cos(a1);
+    const x2=cx+r*Math.sin(a2), y2=cy-r*Math.cos(a2);
+    wedge.setAttribute('d',`M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,0 ${x2},${y2} Z`);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.skill-bar-fill').forEach(b=>b.classList.add('animated'));
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Nav active state
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  links.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--cyan)':'';});
+});
+</script>
+</body>
+</html>
