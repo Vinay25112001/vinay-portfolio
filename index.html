@@ -234,10 +234,11 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
 
 /* highlight box rows */
 .highlight-row{
-  display:flex;align-items:baseline;gap:10px;
+  display:flex;align-items:center;gap:10px;
   font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);
   line-height:1.9;
 }
+.highlight-row-text{ flex:1; }
 .highlight-row + .highlight-row{margin-top:4px;}
 .highlight-tag{
   font-size:8px;font-weight:700;letter-spacing:.12em;
@@ -246,11 +247,38 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   color:var(--cyan);
 }
 
+/* Download pill button on journal row */
+.highlight-dl{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;flex-shrink:0;
+  font-family:'Share Tech Mono',monospace;font-size:8px;font-weight:700;
+  letter-spacing:.1em;text-decoration:none;
+  background:rgba(245,158,11,0.1);
+  border:1px solid rgba(245,158,11,0.28);
+  color:#f59e0b;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .2s;
+  white-space:nowrap;
+}
+.highlight-dl:hover{
+  background:rgba(245,158,11,0.22);
+  border-color:rgba(251,191,36,0.55);
+  box-shadow:0 0 12px rgba(245,158,11,0.35);
+  transform:translateY(-2px);
+  color:#fde68a;
+}
+
+.highlight-box{
+  margin-top:22px;padding:18px 22px;
+  background:rgba(14,165,233,0.04);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(14,165,233,0.10);
+  border-radius:14px;position:relative;overflow:visible;
+}
+.highlight-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,0.3),transparent);border-radius:14px 14px 0 0;}
+
 #about .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
 .about-text p{font-size:15px;color:var(--text);line-height:1.9;margin-bottom:16px;}
 .about-text p strong{color:var(--cyan);}
-.highlight-box{margin-top:22px;padding:18px 22px;background:rgba(14,165,233,0.05);backdrop-filter:blur(12px);border:1px solid rgba(14,165,233,0.12);border-radius:14px;position:relative;overflow:hidden;}
-.highlight-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(14,165,233,0.25),transparent);}
 
 .about-panels{ position:relative;display:flex;flex-direction:column;gap:12px; }
 .info-panel{ padding:18px 22px;transition:box-shadow .35s; }
@@ -638,10 +666,12 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
       <p>My work sits at the intersection of <strong>computational aircraft design, multidisciplinary optimization, and digital engineering</strong> — building the tools that enable next-generation Advanced Air Mobility.</p>
       <p>From hover rotor analysis and battery energy budgets to V-tail authority checks, I build end-to-end parametric tools that close the loop between early concept and physics-validated design.</p>
 
-      <div class="highlight-box">
-        <div class="highlight-row"><span class="highlight-tag">PAPER</span>Co-authoring — AIAA Journal of Aircraft, Integrated eVTOL Sizing Frameworks</div>
-        <div class="highlight-row"><span class="highlight-tag">APP</span>Full eVTOL sizing tool — 10 analysis tabs, PDF report, OpenVSP export</div>
-        <div class="highlight-row"><span class="highlight-tag">JOURNAL</span>Hoverbike propulsion research — IJISRT peer-reviewed publication</div>
+      <div class="gold-grid" style="position:relative;">
+        <div class="highlight-box" id="highlight-box">
+        <div class="highlight-row"><span class="highlight-tag">PAPER</span><span class="highlight-row-text">Co-authoring — AIAA Journal of Aircraft, Integrated eVTOL Sizing Frameworks</span></div>
+        <div class="highlight-row"><span class="highlight-tag">APP</span><span class="highlight-row-text">Full eVTOL sizing tool — 10 analysis tabs, PDF report, OpenVSP export</span></div>
+        <div class="highlight-row"><span class="highlight-tag">JOURNAL</span><span class="highlight-row-text">Hoverbike propulsion research — IJISRT peer-reviewed publication</span><a href="./Hoverbike_Propulsion_Research_IJISRT.pdf" download class="highlight-dl">⬇ DOWNLOAD</a></div>
+      </div>
       </div>
     </div>
 
