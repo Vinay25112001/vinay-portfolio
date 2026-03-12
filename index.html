@@ -250,6 +250,27 @@ section{position:relative;z-index:2;padding:96px 10vw;}
 
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
+
+  <!-- AEROSPACE CANVAS BACKGROUND -->
+  <canvas id="aero-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;animation:fadeIn 2s .5s ease forwards;"></canvas>
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  <!-- FLOATING TELEMETRY READOUTS -->
+  <div id="hud-tl" style="position:absolute;top:110px;left:10vw;z-index:2;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,212,255,0.35);letter-spacing:.1em;line-height:2.2;pointer-events:none;opacity:0;animation:fadeIn 1s 1.5s ease forwards;">
+    SYS_ID: TRAIL-1_EVTOL<br>
+    MTOW: 2161 kg<br>
+    WING_SPAN: 12.77 m<br>
+    CRUISE_V: 67 m/s<br>
+    RANGE: 250 km
+  </div>
+  <div id="hud-br" style="position:absolute;bottom:80px;right:10vw;z-index:2;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,255,157,0.3);letter-spacing:.1em;line-height:2.2;text-align:right;pointer-events:none;opacity:0;animation:fadeIn 1s 1.8s ease forwards;">
+    HOVER_PWR: 287 kW<br>
+    BATTERY: 300 Wh/kg<br>
+    STATIC_MARGIN: 22.5%<br>
+    L/D: 14.0<br>
+    STATUS: FEASIBLE ✓
+  </div>
+
   <div class="hero-content">
     <div class="hero-eyebrow">Aerospace Systems Engineer &nbsp;·&nbsp; Fairborn, OH</div>
     <h1 class="hero-name">
@@ -562,6 +583,370 @@ section{position:relative;z-index:2;padding:96px 10vw;}
 </section>
 
 <script>
+// ══════════════════════════════════════════════════════
+//  AEROSPACE HERO CANVAS — eVTOL wireframe + particles
+// ══════════════════════════════════════════════════════
+(function () {
+  const canvas = document.getElementById('aero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, mouse = { x: -999, y: -999 };
+  let particles = [], animFrameId;
+  let t = 0;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  canvas.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+
+  // ── Colour palette
+  const C = {
+    cyan:   'rgba(0,212,255,',
+    green:  'rgba(0,255,157,',
+    orange: 'rgba(255,107,53,',
+    amber:  'rgba(255,184,0,',
+    white:  'rgba(240,248,255,',
+  };
+
+  // ── Particles (nodes of a flight-computer network)
+  function initParticles() {
+    particles = [];
+    const n = Math.min(70, Math.floor(W * H / 14000));
+    for (let i = 0; i < n; i++) {
+      particles.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - .5) * .35,
+        vy: (Math.random() - .5) * .35,
+        r: Math.random() * 1.8 + .6,
+        col: [C.cyan, C.cyan, C.cyan, C.green, C.amber][Math.floor(Math.random() * 5)],
+        pulse: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+  initParticles();
+  window.addEventListener('resize', initParticles);
+
+  function drawParticles() {
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      p.pulse += .02;
+      const glow = .4 + .3 * Math.sin(p.pulse);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.col + glow + ')';
+      ctx.fill();
+    });
+    // Connect nearby particles
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxD = 130;
+        if (dist < maxD) {
+          const alpha = (1 - dist / maxD) * 0.22;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = C.cyan + alpha + ')';
+          ctx.lineWidth = .6;
+          ctx.stroke();
+        }
+      }
+      // Mouse interaction
+      const mx = particles[i].x - mouse.x, my = particles[i].y - mouse.y;
+      const md = Math.sqrt(mx * mx + my * my);
+      if (md < 150) {
+        const alpha = (1 - md / 150) * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = C.cyan + alpha + ')';
+        ctx.lineWidth = .8;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // ── eVTOL wireframe drawing (lift+cruise configuration)
+  function drawEVTOL(cx, cy, scale, alpha) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(scale, scale);
+    ctx.globalAlpha = alpha;
+
+    const lw = 1.2;
+
+    // Fuselage
+    ctx.beginPath();
+    ctx.moveTo(-110, -8); ctx.lineTo(-80, -14);
+    ctx.lineTo(60, -14); ctx.lineTo(110, -4);
+    ctx.lineTo(100, 8); ctx.lineTo(-80, 8);
+    ctx.closePath();
+    ctx.strokeStyle = C.cyan + '0.9)';
+    ctx.lineWidth = lw;
+    ctx.stroke();
+    ctx.fillStyle = C.cyan + '0.04)';
+    ctx.fill();
+
+    // Nose cone detail
+    ctx.beginPath();
+    ctx.moveTo(-110, -8); ctx.lineTo(-130, 0); ctx.lineTo(-110, 8);
+    ctx.strokeStyle = C.cyan + '0.7)';
+    ctx.lineWidth = lw * .8;
+    ctx.stroke();
+
+    // Main wing (upper)
+    ctx.beginPath();
+    ctx.moveTo(-10, -14); ctx.lineTo(-20, -62);
+    ctx.lineTo(30, -62); ctx.lineTo(40, -14);
+    ctx.closePath();
+    ctx.strokeStyle = C.cyan + '0.85)';
+    ctx.lineWidth = lw;
+    ctx.stroke();
+    ctx.fillStyle = C.cyan + '0.05)';
+    ctx.fill();
+
+    // Main wing (lower mirror)
+    ctx.beginPath();
+    ctx.moveTo(-10, 8); ctx.lineTo(-20, 56);
+    ctx.lineTo(30, 56); ctx.lineTo(40, 8);
+    ctx.closePath();
+    ctx.strokeStyle = C.cyan + '0.85)';
+    ctx.lineWidth = lw;
+    ctx.stroke();
+    ctx.fillStyle = C.cyan + '0.05)';
+    ctx.fill();
+
+    // Wing chord lines
+    [-40, -20, 0, 20].forEach(x => {
+      ctx.beginPath();
+      ctx.moveTo(x, -62); ctx.lineTo(x + 8, -14);
+      ctx.strokeStyle = C.cyan + '0.18)';
+      ctx.lineWidth = .5; ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x, 56); ctx.lineTo(x + 8, 8);
+      ctx.stroke();
+    });
+
+    // V-tail panels
+    const vtG = 45 * Math.PI / 180;
+    const vtL = 38;
+    // Left panel
+    ctx.beginPath();
+    ctx.moveTo(80, 0);
+    ctx.lineTo(80 - vtL * Math.cos(vtG), -vtL * Math.sin(vtG));
+    ctx.lineTo(110 - vtL * Math.cos(vtG), -vtL * Math.sin(vtG));
+    ctx.lineTo(110, 0);
+    ctx.closePath();
+    ctx.strokeStyle = C.orange + '0.7)';
+    ctx.lineWidth = lw * .9;
+    ctx.stroke();
+    ctx.fillStyle = C.orange + '0.04)';
+    ctx.fill();
+    // Right panel
+    ctx.beginPath();
+    ctx.moveTo(80, 0);
+    ctx.lineTo(80 - vtL * Math.cos(vtG), vtL * Math.sin(vtG));
+    ctx.lineTo(110 - vtL * Math.cos(vtG), vtL * Math.sin(vtG));
+    ctx.lineTo(110, 0);
+    ctx.closePath();
+    ctx.strokeStyle = C.orange + '0.7)';
+    ctx.lineWidth = lw * .9;
+    ctx.stroke();
+    ctx.fillStyle = C.orange + '0.04)';
+    ctx.fill();
+
+    // Hover rotors (6 total, 3 each side)
+    const rotorPositions = [
+      [-20, -62], [5, -62], [30, -62],
+      [-20,  56], [5,  56], [30,  56],
+    ];
+    const rotorR = 14;
+    const rotSpin = t * 4;
+    rotorPositions.forEach(([rx, ry], idx) => {
+      // Disk
+      ctx.beginPath();
+      ctx.arc(rx, ry, rotorR, 0, Math.PI * 2);
+      ctx.strokeStyle = C.green + '0.5)';
+      ctx.lineWidth = .7; ctx.stroke();
+      ctx.fillStyle = C.green + '0.03)'; ctx.fill();
+      // Spinning blade
+      const spin = rotSpin + idx * (Math.PI / 3);
+      ctx.save();
+      ctx.translate(rx, ry);
+      ctx.rotate(spin);
+      ctx.beginPath();
+      ctx.moveTo(-rotorR + 2, 0); ctx.lineTo(rotorR - 2, 0);
+      ctx.strokeStyle = C.green + '0.7)';
+      ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.rotate(Math.PI / 2);
+      ctx.beginPath();
+      ctx.moveTo(-rotorR + 2, 0); ctx.lineTo(rotorR - 2, 0);
+      ctx.strokeStyle = C.green + '0.5)';
+      ctx.lineWidth = .8; ctx.stroke();
+      ctx.restore();
+      // Hub dot
+      ctx.beginPath();
+      ctx.arc(rx, ry, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = C.green + '0.9)'; ctx.fill();
+    });
+
+    // Cruise propeller (nose)
+    ctx.save();
+    ctx.translate(-130, 0);
+    ctx.rotate(t * 6);
+    [-1, 1].forEach(s => {
+      ctx.beginPath();
+      ctx.moveTo(0, 0); ctx.lineTo(0, s * 22);
+      ctx.strokeStyle = C.cyan + '0.7)';
+      ctx.lineWidth = 2; ctx.stroke();
+    });
+    ctx.restore();
+    ctx.beginPath();
+    ctx.arc(-130, 0, 4, 0, Math.PI * 2);
+    ctx.fillStyle = C.cyan + '0.8)'; ctx.fill();
+
+    // Dimension lines
+    ctx.setLineDash([3, 4]);
+    ctx.lineWidth = .5;
+    // Wingspan dimension
+    ctx.beginPath();
+    ctx.moveTo(-20, -72); ctx.lineTo(30, -72);
+    ctx.strokeStyle = C.amber + '0.4)';
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-20, -68); ctx.lineTo(-20, -76);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(30, -68); ctx.lineTo(30, -76);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Label
+    ctx.font = '8px "Share Tech Mono",monospace';
+    ctx.fillStyle = C.amber + '0.55)';
+    ctx.textAlign = 'center';
+    ctx.fillText('b/2 = 6.4m', 5, -79);
+
+    // Fuselage length label
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath();
+    ctx.moveTo(-130, 16); ctx.lineTo(110, 16);
+    ctx.strokeStyle = C.amber + '0.3)'; ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = C.amber + '0.45)';
+    ctx.fillText('Lf = 7.2 m', -10, 26);
+
+    ctx.restore();
+  }
+
+  // ── Blueprint grid (background)
+  function drawGrid() {
+    const step = 50;
+    ctx.lineWidth = .3;
+    for (let x = 0; x < W; x += step) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H);
+      ctx.strokeStyle = 'rgba(0,212,255,0.04)'; ctx.stroke();
+    }
+    for (let y = 0; y < H; y += step) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y);
+      ctx.strokeStyle = 'rgba(0,212,255,0.04)'; ctx.stroke();
+    }
+    // Major grid every 250px
+    ctx.lineWidth = .5;
+    for (let x = 0; x < W; x += 250) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H);
+      ctx.strokeStyle = 'rgba(0,212,255,0.07)'; ctx.stroke();
+    }
+    for (let y = 0; y < H; y += 250) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y);
+      ctx.strokeStyle = 'rgba(0,212,255,0.07)'; ctx.stroke();
+    }
+  }
+
+  // ── Floating equations
+  const equations = [
+    { text: 'T = MTOW × g₀', x: .72, y: .12, col: C.cyan, a: .18 },
+    { text: 'P_hov = T^(3/2) / √(2ρA)', x: .68, y: .22, col: C.cyan, a: .14 },
+    { text: 'SM = (x_NP − x_CG) / MAC', x: .70, y: .78, col: C.green, a: .16 },
+    { text: 'E_total = Σ P_i × t_i / η', x: .05, y: .80, col: C.amber, a: .15 },
+    { text: 'CD = CD₀ + CL²/(π·AR·e)', x: .04, y: .18, col: C.cyan, a: .13 },
+    { text: 'W_bat = E × 1000 / (SED × η_bat)', x: .60, y: .88, col: C.amber, a: .12 },
+  ];
+  function drawEquations() {
+    equations.forEach(eq => {
+      const flicker = eq.a * (0.7 + 0.3 * Math.sin(t * .8 + eq.x * 10));
+      ctx.font = '10px "Share Tech Mono",monospace';
+      ctx.fillStyle = eq.col + flicker + ')';
+      ctx.textAlign = 'left';
+      ctx.fillText(eq.text, eq.x * W, eq.y * H);
+    });
+  }
+
+  // ── Corner HUD frames
+  function drawHUDCorners() {
+    const size = 28, pad = 16, lw = 1.2;
+    const corners = [
+      [pad, pad + 60, 1, 1], [W - pad, pad + 60, -1, 1],
+      [pad, H - pad, 1, -1], [W - pad, H - pad, -1, -1],
+    ];
+    ctx.lineWidth = lw;
+    corners.forEach(([x, y, sx, sy]) => {
+      ctx.strokeStyle = 'rgba(0,212,255,0.25)';
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + sx * size, y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + sy * size); ctx.stroke();
+    });
+  }
+
+  // ── Scanning beam
+  function drawScanLine() {
+    const yPos = (Math.sin(t * .4) * .5 + .5) * H;
+    const grad = ctx.createLinearGradient(0, yPos - 30, 0, yPos + 30);
+    grad.addColorStop(0, 'rgba(0,212,255,0)');
+    grad.addColorStop(.5, 'rgba(0,212,255,0.05)');
+    grad.addColorStop(1, 'rgba(0,212,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, yPos - 30, W, 60);
+  }
+
+  // ── Main render loop
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.016;
+
+    drawGrid();
+    drawScanLine();
+    drawParticles();
+    drawEquations();
+    drawHUDCorners();
+
+    // Draw eVTOL — anchored to right side, slightly drifting
+    const drift = Math.sin(t * .3) * 12;
+    const evtolX = W * 0.62;
+    const evtolY = H * 0.50 + drift;
+    const scl = Math.min(W, H) / 680;
+    drawEVTOL(evtolX, evtolY, scl, 0.72);
+
+    // Subtle vignette
+    const vig = ctx.createRadialGradient(W/2, H/2, H*.3, W/2, H/2, H*.85);
+    vig.addColorStop(0, 'rgba(3,8,16,0)');
+    vig.addColorStop(1, 'rgba(3,8,16,0.65)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
+
+    animFrameId = requestAnimationFrame(render);
+  }
+  render();
+})();
+
 // Progress bar
 const bar = document.getElementById('progress-bar');
 window.addEventListener('scroll', () => {
