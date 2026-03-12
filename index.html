@@ -3,30 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vinay Kumar Reddy Sirigireddy — Aerospace Systems Engineer</title>
+<title>Vinay Kumar Reddy Sirigireddy - Aerospace Systems Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#030810; --bg2:#060E1C; --panel:#0A1628; --panel2:#0D1E34;
-  --border:#1A3055; --border2:#0F2040;
-  --cyan:#00D4FF; --cyan2:#00A8CC; --orange:#FF6B35;
-  --green:#00FF9D; --amber:#FFB800;
-  --text:#D4E6F9; --muted:#5A7A9A; --dim:#2A4060; --white:#F0F8FF;
-}
+:root{--bg:#030810;--bg2:#060E1C;--panel:#0A1628;--panel2:#0D1E34;--border:#1A3055;--border2:#0F2040;--cyan:#00D4FF;--cyan2:#00A8CC;--orange:#FF6B35;--green:#00FF9D;--amber:#FFB800;--text:#D4E6F9;--muted:#5A7A9A;--dim:#2A4060;--white:#F0F8FF;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--bg2);}
-::-webkit-scrollbar-thumb{background:var(--cyan2);border-radius:2px;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--cyan2);border-radius:2px;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.05) 2px,rgba(0,0,0,0.05) 4px);pointer-events:none;z-index:1;}
-
-/* PROGRESS BAR */
 #progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--cyan2),var(--cyan),var(--green));z-index:2000;width:0%;box-shadow:0 0 8px var(--cyan);}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,8,16,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);transition:padding .3s;}
 nav.scrolled{padding:10px 48px;}
 .nav-logo{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:.15em;text-decoration:none;}
@@ -37,74 +24,48 @@ nav.scrolled{padding:10px 48px;}
 .nav-links a:hover,.nav-links a.active{color:var(--cyan);}
 .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
 .nav-status{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green);letter-spacing:.1em;}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-
-/* HERO */
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:0 10vw;overflow:hidden;}
+#hero-bg{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
 .hero-content{position:relative;z-index:3;max-width:580px;}
-.hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px;opacity:0;animation:fadeUp .7s .2s ease forwards;}
+.hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px;}
 .hero-eyebrow::before{content:'[ ';}
 .hero-eyebrow::after{content:' ]';}
-.hero-name{font-family:'Orbitron',sans-serif;font-size:clamp(28px,4.5vw,64px);font-weight:900;line-height:1.05;letter-spacing:.02em;color:var(--white);margin-bottom:8px;opacity:0;animation:fadeUp .7s .35s ease forwards;}
+.hero-name{font-family:'Orbitron',sans-serif;font-size:clamp(28px,4.5vw,64px);font-weight:900;line-height:1.05;color:var(--white);margin-bottom:8px;}
 .hero-name .first{display:block;}
-.hero-name .last{color:var(--cyan);display:block;}
-.hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(13px,1.7vw,19px);font-weight:600;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeUp .7s .48s ease forwards;}
-.hero-desc{font-size:15px;color:var(--text);max-width:520px;line-height:1.85;margin-bottom:34px;opacity:0;animation:fadeUp .7s .6s ease forwards;}
+.hero-name .last{display:block;color:var(--cyan);}
+.hero-title{font-size:clamp(13px,1.7vw,19px);font-weight:600;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;}
+.hero-desc{font-size:15px;color:var(--text);max-width:520px;line-height:1.85;margin-bottom:34px;}
 .hero-desc strong{color:var(--cyan);}
-.hero-stats{display:flex;gap:28px;margin-bottom:38px;opacity:0;animation:fadeUp .7s .72s ease forwards;}
+.hero-stats{display:flex;gap:28px;margin-bottom:38px;}
 .hero-stat-val{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:700;color:var(--cyan);line-height:1;}
 .hero-stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
 .hero-divider{width:1px;background:var(--border);align-self:stretch;}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .84s ease forwards;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:var(--cyan);color:#030810;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,11px 100%,0 calc(100% - 11px));transition:all .25s;}
-.btn-primary:hover{background:var(--white);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,.25);}
+.btn-primary:hover{background:var(--white);transform:translateY(-2px);}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:transparent;color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid var(--cyan);clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,11px 100%,0 calc(100% - 11px));transition:all .25s;}
 .btn-secondary:hover{background:rgba(0,212,255,.1);transform:translateY(-2px);}
 .btn-download{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:transparent;color:var(--orange);font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid var(--orange);clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,11px 100%,0 calc(100% - 11px));transition:all .25s;}
-.btn-download:hover{background:rgba(255,107,53,.1);transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,107,53,.2);}
-
-/* PROFILE PHOTO */
-.hero-photo-wrap{position:absolute;right:8vw;top:50%;transform:translateY(-50%);z-index:3;opacity:0;animation:photoIn 1s .7s ease forwards;}
-@keyframes photoIn{from{opacity:0;transform:translateY(-50%) scale(.9);}to{opacity:1;transform:translateY(-50%) scale(1);}}
-.photo-orbit-ring{position:absolute;inset:-30px;border-radius:50%;border:1px dashed rgba(0,212,255,.18);animation:spin 14s linear infinite;}
-.photo-orbit-ring::after{content:'';position:absolute;top:-5px;left:50%;width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);transform:translateX(-50%);}
-@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-.photo-glow-ring{position:absolute;inset:-4px;border-radius:38% 62% 50% 50%/50% 44% 56% 50%;background:linear-gradient(135deg,var(--cyan),var(--cyan2),var(--green),var(--cyan));animation:morphGlow 7s linear infinite;opacity:.75;}
-@keyframes morphGlow{
-  0%,100%{border-radius:38% 62% 50% 50%/50% 44% 56% 50%;transform:rotate(0deg);}
-  33%{border-radius:50% 50% 44% 56%/54% 46% 54% 46%;transform:rotate(120deg);}
-  66%{border-radius:44% 56% 60% 40%/44% 58% 42% 56%;transform:rotate(240deg);}
-}
-.photo-frame{width:250px;height:250px;position:relative;display:flex;align-items:center;justify-content:center;}
-.photo-inner{width:238px;height:238px;border-radius:36% 64% 50% 50%/50% 42% 58% 50%;overflow:hidden;position:relative;z-index:2;background:var(--panel);border:2px solid rgba(0,212,255,.25);animation:morphShape 7s linear infinite;}
-@keyframes morphShape{
-  0%,100%{border-radius:36% 64% 50% 50%/50% 42% 58% 50%;}
-  33%{border-radius:50% 50% 42% 58%/54% 46% 54% 46%;}
-  66%{border-radius:42% 58% 60% 40%/44% 56% 44% 56%;}
-}
+.btn-download:hover{background:rgba(255,107,53,.1);transform:translateY(-2px);}
+.hero-photo-wrap{position:absolute;right:8vw;top:50%;transform:translateY(-50%);z-index:3;}
+.photo-frame{position:relative;width:250px;height:250px;display:flex;align-items:center;justify-content:center;}
+.photo-inner{width:238px;height:238px;border-radius:36% 64% 50% 50% / 50% 42% 58% 50%;overflow:hidden;position:relative;z-index:2;background:var(--panel);border:2px solid rgba(0,212,255,.3);}
 .photo-inner img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
 .photo-placeholder-icon{font-size:58px;opacity:.35;}
 .photo-placeholder-text{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;text-align:center;line-height:1.9;}
+.photo-ring{position:absolute;inset:-8px;border-radius:38% 62% 50% 50% / 50% 44% 56% 50%;border:2px solid rgba(0,212,255,.35);}
+.photo-ring2{position:absolute;inset:-18px;border-radius:50%;border:1px dashed rgba(0,212,255,.15);}
 .radar-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:340px;height:340px;z-index:1;opacity:.12;pointer-events:none;}
-
-/* SCROLL HINT */
-.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;opacity:0;animation:fadeUp .8s 1.4s ease forwards;}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;z-index:4;}
 .scroll-arrow{width:20px;height:30px;border:1px solid var(--border);border-radius:10px;position:relative;}
-.scroll-arrow::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--cyan);animation:scrollDot 1.8s infinite;}
-@keyframes scrollDot{0%{top:6px;opacity:1;}80%{top:18px;opacity:0;}100%{top:6px;opacity:0;}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
-
-/* SECTIONS */
 section{position:relative;z-index:2;padding:96px 10vw;}
 .section-eyebrow{display:flex;align-items:center;gap:12px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.25em;text-transform:uppercase;margin-bottom:12px;}
 .section-eyebrow::before{content:'';width:36px;height:1px;background:var(--cyan);}
 .section-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
 .section-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:46px;}
 .section-title span{color:var(--cyan);}
-
-/* REVEAL */
 .reveal{opacity:0;transition:opacity .75s ease,transform .75s ease;}
 .reveal.from-bottom{transform:translateY(36px);}
 .reveal.from-left{transform:translateX(-40px);}
@@ -112,25 +73,20 @@ section{position:relative;z-index:2;padding:96px 10vw;}
 .reveal.from-scale{transform:scale(.93);}
 .reveal.visible{opacity:1;transform:none!important;}
 .delay-1{transition-delay:.1s;}.delay-2{transition-delay:.19s;}.delay-3{transition-delay:.28s;}.delay-4{transition-delay:.37s;}.delay-5{transition-delay:.46s;}
-
-/* ABOUT */
 #about{background:var(--bg2);}
 #about .grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:start;}
 .about-text p{font-size:15px;color:var(--text);line-height:1.9;margin-bottom:16px;}
-.about-text p strong{color:var(--cyan);font-weight:600;}
-.highlight-box{margin-top:22px;padding:15px 19px;border-left:3px solid var(--cyan);background:rgba(0,212,255,.04);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9;letter-spacing:.05em;}
+.about-text p strong{color:var(--cyan);}
+.highlight-box{margin-top:22px;padding:15px 19px;border-left:3px solid var(--cyan);background:rgba(0,212,255,.04);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9;}
 .about-panels{display:flex;flex-direction:column;gap:12px;}
 .info-panel{background:var(--panel);border:1px solid var(--border2);border-top:2px solid var(--cyan);padding:16px 20px;position:relative;overflow:hidden;transition:box-shadow .3s;}
 .info-panel:hover{box-shadow:0 0 20px rgba(0,212,255,.08);}
-.info-panel::before{content:'';position:absolute;top:0;right:0;width:56px;height:56px;background:linear-gradient(225deg,rgba(0,212,255,.05),transparent);}
 .info-panel-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px;}
 .info-panel-value{font-family:'Orbitron',sans-serif;font-size:19px;font-weight:700;color:var(--white);line-height:1.15;}
 .info-panel-sub{font-size:11px;color:var(--muted);margin-top:2px;}
 .corner-tl,.corner-br{position:absolute;width:15px;height:15px;}
 .corner-tl{top:8px;left:8px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
 .corner-br{bottom:8px;right:8px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
-
-/* SKILLS */
 #skills{background:var(--bg);}
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;}
 .skill-category{background:var(--panel);border:1px solid var(--border2);padding:21px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;}
@@ -140,51 +96,43 @@ section{position:relative;z-index:2;padding:96px 10vw;}
 .skill-bar-wrap{margin-bottom:12px;}
 .skill-bar-header{display:flex;justify-content:space-between;font-size:12px;color:var(--text);margin-bottom:5px;}
 .skill-bar-pct{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);}
-.skill-bar-bg{height:3px;background:var(--border);overflow:hidden;position:relative;}
-.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan2),var(--cyan));width:0;transition:width 1.6s cubic-bezier(.25,.46,.45,.94);position:relative;}
-.skill-bar-fill::after{content:'';position:absolute;right:0;top:0;width:4px;height:100%;background:white;opacity:.85;box-shadow:0 0 5px var(--cyan);}
+.skill-bar-bg{height:3px;background:var(--border);overflow:hidden;}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan2),var(--cyan));width:0;transition:width 1.6s cubic-bezier(.25,.46,.45,.94);}
 .tech-tags{display:flex;flex-wrap:wrap;gap:7px;}
-.tech-tag{padding:5px 10px;border:1px solid var(--border);background:var(--bg2);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.07em;transition:all .2s;cursor:default;}
+.tech-tag{padding:5px 10px;border:1px solid var(--border);background:var(--bg2);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);transition:all .2s;cursor:default;}
 .tech-tag:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05);transform:translateY(-2px);}
-
-/* EXPERIENCE */
 #experience{background:var(--bg2);}
 .timeline{position:relative;}
 .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--cyan),var(--border),transparent);}
 .timeline-item{padding:0 0 48px 42px;position:relative;}
 .timeline-dot{position:absolute;left:-7px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 10px rgba(0,212,255,.4);transition:transform .3s;}
-.timeline-dot.active{background:var(--cyan);animation:dotPulse 2.5s infinite;}
+.timeline-dot.active{background:var(--cyan);}
 .timeline-item:hover .timeline-dot{transform:scale(1.4);}
-@keyframes dotPulse{0%,100%{box-shadow:0 0 8px rgba(0,212,255,.4);}50%{box-shadow:0 0 22px rgba(0,212,255,.9);}}
 .timeline-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;}
-.timeline-role{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--white);letter-spacing:.03em;}
-.timeline-period{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.1em;white-space:nowrap;padding:4px 10px;border:1px solid rgba(255,107,53,.3);background:rgba(255,107,53,.05);}
-.timeline-org{font-size:12px;color:var(--cyan);margin-bottom:12px;font-weight:600;letter-spacing:.07em;}
+.timeline-role{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--white);}
+.timeline-period{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--orange);white-space:nowrap;padding:4px 10px;border:1px solid rgba(255,107,53,.3);background:rgba(255,107,53,.05);}
+.timeline-org{font-size:12px;color:var(--cyan);margin-bottom:12px;font-weight:600;}
 .timeline-bullets{list-style:none;}
 .timeline-bullets li{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:7px;padding-left:18px;position:relative;}
 .timeline-bullets li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:10px;top:3px;}
 .timeline-bullets li strong{color:var(--text);}
-
-/* PROJECTS */
 #projects{background:var(--bg);}
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;}
-.project-card{background:var(--panel);border:1px solid var(--border2);padding:23px;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.25,.46,.45,.94),border-color .3s,box-shadow .3s;cursor:default;}
-.project-card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 18px rgba(0,212,255,.07);}
+.project-card{background:var(--panel);border:1px solid var(--border2);padding:23px;position:relative;overflow:hidden;transition:transform .35s,border-color .3s,box-shadow .3s;}
+.project-card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 16px 40px rgba(0,0,0,.5);}
 .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .3s;}
 .project-card:hover::before{opacity:1;}
 .project-card-num{font-family:'Orbitron',sans-serif;font-size:10px;color:var(--border);letter-spacing:.2em;margin-bottom:10px;}
 .project-card-title{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.45;}
 .project-card-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:16px;}
 .project-tags{display:flex;flex-wrap:wrap;gap:5px;}
-.project-tag{padding:3px 9px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:.07em;}
+.project-tag{padding:3px 9px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);}
 .project-card.featured{grid-column:span 2;background:linear-gradient(135deg,var(--panel),var(--panel2));border-color:rgba(0,212,255,.2);}
 .project-card.featured .project-card-title{font-size:14px;}
-.project-featured-badge{display:inline-block;margin-bottom:9px;padding:3px 10px;background:var(--orange);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;}
-
-/* EDUCATION */
+.project-featured-badge{display:inline-block;margin-bottom:9px;padding:3px 10px;background:var(--orange);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.14em;}
 #education{background:var(--bg2);}
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.edu-card{background:var(--panel);border:1px solid var(--border2);border-left:3px solid var(--cyan);padding:24px 27px;position:relative;transition:transform .3s,box-shadow .3s;}
+.edu-card{background:var(--panel);border:1px solid var(--border2);border-left:3px solid var(--cyan);padding:24px 27px;transition:transform .3s,box-shadow .3s;}
 .edu-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.4);}
 .edu-degree{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);margin-bottom:5px;line-height:1.4;}
 .edu-uni{font-size:13px;color:var(--cyan);margin-bottom:3px;font-weight:600;}
@@ -193,29 +141,22 @@ section{position:relative;z-index:2;padding:96px 10vw;}
 .edu-bullets{margin-top:12px;list-style:none;}
 .edu-bullets li{font-size:13px;color:var(--muted);line-height:1.7;padding-left:16px;position:relative;margin-bottom:3px;}
 .edu-bullets li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:10px;top:3px;}
-
-/* CERTS */
 #certifications{background:var(--bg);padding-top:80px;padding-bottom:80px;}
 .cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;}
 .cert-card{background:var(--panel);border:1px solid var(--border2);padding:17px;text-align:center;transition:all .27s;position:relative;overflow:hidden;}
-.cert-card:hover{border-color:var(--amber);background:var(--panel2);transform:translateY(-5px);box-shadow:0 10px 26px rgba(0,0,0,.4);}
+.cert-card:hover{border-color:var(--amber);background:var(--panel2);transform:translateY(-5px);}
 .cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transition:transform .27s;}
 .cert-card:hover::before{transform:scaleX(1);}
 .cert-icon{font-size:22px;margin-bottom:8px;}
 .cert-name{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:3px;}
 .cert-issuer{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:.1em;}
-
-/* CONTACT */
 #contact{background:var(--bg2);text-align:center;}
 .contact-inner{max-width:640px;margin:0 auto;}
 .contact-tagline{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:42px;}
 .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:50px;}
-.contact-link{display:flex;align-items:center;gap:10px;padding:12px 20px;border:1px solid var(--border);background:var(--panel);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text);text-decoration:none;letter-spacing:.07em;transition:all .25s;}
-.contact-link:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05);transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.4);}
-.contact-link-icon{font-size:15px;}
+.contact-link{display:flex;align-items:center;gap:10px;padding:12px 20px;border:1px solid var(--border);background:var(--panel);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text);text-decoration:none;transition:all .25s;}
+.contact-link:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05);transform:translateY(-4px);}
 .footer-line{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.13em;border-top:1px solid var(--border2);padding-top:24px;line-height:2;}
-
-/* RESPONSIVE */
 @media(max-width:1000px){
   .hero-photo-wrap{display:none;}
   nav{padding:12px 20px;}
@@ -226,50 +167,144 @@ section{position:relative;z-index:2;padding:96px 10vw;}
   .projects-grid{grid-template-columns:1fr;}
   .project-card.featured{grid-column:span 1;}
   .cert-grid{grid-template-columns:repeat(2,1fr);}
-  .hero-stats{gap:16px;}
-  .hero-ctas{gap:10px;}
 }
 </style>
 </head>
 <body>
-
 <div id="progress-bar"></div>
-
 <nav id="main-nav">
   <a class="nav-logo" href="#hero">VKR<span>S</span></a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li><li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-status"><div class="status-dot"></div>OPEN TO OPPORTUNITIES</div>
 </nav>
 
-<!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
+  <!-- SVG aerospace background — no keyframes, no canvas, pure SVG -->
+  <svg id="hero-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <!-- Blueprint grid lines -->
+    <defs>
+      <pattern id="smallgrid" width="48" height="48" patternUnits="userSpaceOnUse">
+        <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(0,212,255,0.04)" stroke-width="0.5"/>
+      </pattern>
+      <pattern id="biggrid" width="240" height="240" patternUnits="userSpaceOnUse">
+        <rect width="240" height="240" fill="url(#smallgrid)"/>
+        <path d="M 240 0 L 0 0 0 240" fill="none" stroke="rgba(0,212,255,0.09)" stroke-width="0.8"/>
+      </pattern>
+      <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="rgba(3,8,16,0)"/>
+        <stop offset="100%" stop-color="rgba(3,8,16,0.75)"/>
+      </radialGradient>
+      <radialGradient id="sweep" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(0,212,255,0.35)"/>
+        <stop offset="100%" stop-color="rgba(0,212,255,0)"/>
+      </radialGradient>
+    </defs>
 
-  <!-- AEROSPACE CANVAS BACKGROUND -->
-  <canvas id="aero-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;animation:fadeIn 2s .5s ease forwards;"></canvas>
-  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    <!-- Grid -->
+    <rect width="1440" height="900" fill="url(#biggrid)"/>
 
-  <!-- FLOATING TELEMETRY READOUTS -->
-  <div id="hud-tl" style="position:absolute;top:110px;left:10vw;z-index:2;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,212,255,0.35);letter-spacing:.1em;line-height:2.2;pointer-events:none;opacity:0;animation:fadeIn 1s 1.5s ease forwards;">
-    SYS_ID: TRAIL-1_EVTOL<br>
-    MTOW: 2161 kg<br>
-    WING_SPAN: 12.77 m<br>
-    CRUISE_V: 67 m/s<br>
-    RANGE: 250 km
-  </div>
-  <div id="hud-br" style="position:absolute;bottom:80px;right:10vw;z-index:2;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,255,157,0.3);letter-spacing:.1em;line-height:2.2;text-align:right;pointer-events:none;opacity:0;animation:fadeIn 1s 1.8s ease forwards;">
-    HOVER_PWR: 287 kW<br>
-    BATTERY: 300 Wh/kg<br>
-    STATIC_MARGIN: 22.5%<br>
-    L/D: 14.0<br>
-    STATUS: FEASIBLE ✓
-  </div>
+    <!-- ── eVTOL top-view wireframe (centered right half) ── -->
+    <g transform="translate(1020,450) scale(1.15)" opacity="0.68">
+      <!-- Fuselage -->
+      <polygon points="-110,-8 -80,-14 60,-14 110,-4 100,8 -80,8" fill="rgba(0,212,255,0.04)" stroke="rgba(0,212,255,0.85)" stroke-width="1.2"/>
+      <!-- Nose -->
+      <polyline points="-110,-8 -132,0 -110,8" fill="none" stroke="rgba(0,212,255,0.65)" stroke-width="1"/>
+      <!-- Wing top -->
+      <polygon points="-12,-14 -22,-64 32,-64 42,-14" fill="rgba(0,212,255,0.045)" stroke="rgba(0,212,255,0.82)" stroke-width="1.2"/>
+      <!-- Wing bottom -->
+      <polygon points="-12,8 -22,58 32,58 42,8" fill="rgba(0,212,255,0.045)" stroke="rgba(0,212,255,0.82)" stroke-width="1.2"/>
+      <!-- Wing chord lines top -->
+      <line x1="-18" y1="-64" x2="-8" y2="-14" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <line x1="-2" y1="-64" x2="8" y2="-14" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <line x1="14" y1="-64" x2="24" y2="-14" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <line x1="28" y1="-64" x2="38" y2="-14" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <!-- Wing chord lines bottom -->
+      <line x1="-18" y1="58" x2="-8" y2="8" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <line x1="-2" y1="58" x2="8" y2="8" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <line x1="14" y1="58" x2="24" y2="8" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <line x1="28" y1="58" x2="38" y2="8" stroke="rgba(0,212,255,0.14)" stroke-width="0.5"/>
+      <!-- V-tail left panel -->
+      <polygon points="80,0 53,-27 83,-27 110,0" fill="rgba(255,107,53,0.04)" stroke="rgba(255,107,53,0.72)" stroke-width="1.1"/>
+      <!-- V-tail right panel -->
+      <polygon points="80,0 53,27 83,27 110,0" fill="rgba(255,107,53,0.04)" stroke="rgba(255,107,53,0.72)" stroke-width="1.1"/>
+      <!-- 6 hover rotors -->
+      <!-- Top 3 -->
+      <circle cx="-20" cy="-64" r="13" fill="rgba(0,255,157,0.03)" stroke="rgba(0,255,157,0.5)" stroke-width="0.7"/>
+      <line x1="-33" y1="-64" x2="-7" y2="-64" stroke="rgba(0,255,157,0.7)" stroke-width="1.4"/>
+      <line x1="-20" y1="-77" x2="-20" y2="-51" stroke="rgba(0,255,157,0.5)" stroke-width="0.9"/>
+      <circle cx="-20" cy="-64" r="2.2" fill="rgba(0,255,157,0.9)"/>
+      <circle cx="6" cy="-64" r="13" fill="rgba(0,255,157,0.03)" stroke="rgba(0,255,157,0.5)" stroke-width="0.7"/>
+      <line x1="-7" y1="-64" x2="19" y2="-64" stroke="rgba(0,255,157,0.7)" stroke-width="1.4"/>
+      <line x1="6" y1="-77" x2="6" y2="-51" stroke="rgba(0,255,157,0.5)" stroke-width="0.9"/>
+      <circle cx="6" cy="-64" r="2.2" fill="rgba(0,255,157,0.9)"/>
+      <circle cx="32" cy="-64" r="13" fill="rgba(0,255,157,0.03)" stroke="rgba(0,255,157,0.5)" stroke-width="0.7"/>
+      <line x1="19" y1="-64" x2="45" y2="-64" stroke="rgba(0,255,157,0.7)" stroke-width="1.4"/>
+      <line x1="32" y1="-77" x2="32" y2="-51" stroke="rgba(0,255,157,0.5)" stroke-width="0.9"/>
+      <circle cx="32" cy="-64" r="2.2" fill="rgba(0,255,157,0.9)"/>
+      <!-- Bottom 3 -->
+      <circle cx="-20" cy="58" r="13" fill="rgba(0,255,157,0.03)" stroke="rgba(0,255,157,0.5)" stroke-width="0.7"/>
+      <line x1="-33" y1="58" x2="-7" y2="58" stroke="rgba(0,255,157,0.7)" stroke-width="1.4"/>
+      <line x1="-20" y1="45" x2="-20" y2="71" stroke="rgba(0,255,157,0.5)" stroke-width="0.9"/>
+      <circle cx="-20" cy="58" r="2.2" fill="rgba(0,255,157,0.9)"/>
+      <circle cx="6" cy="58" r="13" fill="rgba(0,255,157,0.03)" stroke="rgba(0,255,157,0.5)" stroke-width="0.7"/>
+      <line x1="-7" y1="58" x2="19" y2="58" stroke="rgba(0,255,157,0.7)" stroke-width="1.4"/>
+      <line x1="6" y1="45" x2="6" y2="71" stroke="rgba(0,255,157,0.5)" stroke-width="0.9"/>
+      <circle cx="6" cy="58" r="2.2" fill="rgba(0,255,157,0.9)"/>
+      <circle cx="32" cy="58" r="13" fill="rgba(0,255,157,0.03)" stroke="rgba(0,255,157,0.5)" stroke-width="0.7"/>
+      <line x1="19" y1="58" x2="45" y2="58" stroke="rgba(0,255,157,0.7)" stroke-width="1.4"/>
+      <line x1="32" y1="45" x2="32" y2="71" stroke="rgba(0,255,157,0.5)" stroke-width="0.9"/>
+      <circle cx="32" cy="58" r="2.2" fill="rgba(0,255,157,0.9)"/>
+      <!-- Cruise propeller at nose -->
+      <circle cx="-132" cy="0" r="3.5" fill="rgba(0,212,255,0.85)"/>
+      <line x1="-132" y1="-22" x2="-132" y2="22" stroke="rgba(0,212,255,0.7)" stroke-width="1.8"/>
+      <!-- Dimension lines -->
+      <line x1="-22" y1="-76" x2="32" y2="-76" stroke="rgba(255,184,0,0.4)" stroke-width="0.5" stroke-dasharray="3,5"/>
+      <line x1="-22" y1="-72" x2="-22" y2="-80" stroke="rgba(255,184,0,0.4)" stroke-width="0.5"/>
+      <line x1="32" y1="-72" x2="32" y2="-80" stroke="rgba(255,184,0,0.4)" stroke-width="0.5"/>
+      <text x="5" y="-83" font-family="'Share Tech Mono',monospace" font-size="8" fill="rgba(255,184,0,0.55)" text-anchor="middle">b/2 = 6.4m</text>
+      <line x1="-132" y1="18" x2="110" y2="18" stroke="rgba(255,184,0,0.35)" stroke-width="0.5" stroke-dasharray="3,5"/>
+      <text x="-11" y="28" font-family="'Share Tech Mono',monospace" font-size="8" fill="rgba(255,184,0,0.5)" text-anchor="middle">Lf = 7.2m</text>
+      <!-- Quarter chord sweep line -->
+      <line x1="-12" y1="-14" x2="-22" y2="-64" stroke="rgba(255,184,0,0.25)" stroke-width="0.6" stroke-dasharray="4,4"/>
+      <!-- MAC bar -->
+      <line x1="8" y1="-14" x2="4" y2="-64" stroke="rgba(0,255,157,0.3)" stroke-width="1.2"/>
+    </g>
+
+    <!-- Floating equations right side -->
+    <text x="940" y="95" font-family="'Share Tech Mono',monospace" font-size="10" fill="rgba(0,212,255,0.18)">T = MTOW x g0</text>
+    <text x="910" y="175" font-family="'Share Tech Mono',monospace" font-size="10" fill="rgba(0,212,255,0.15)">P_hov = T^(3/2) / sqrt(2pA)</text>
+    <text x="920" y="750" font-family="'Share Tech Mono',monospace" font-size="10" fill="rgba(0,255,157,0.16)">SM = (x_NP - x_CG) / MAC</text>
+    <text x="60" y="730" font-family="'Share Tech Mono',monospace" font-size="10" fill="rgba(255,184,0,0.15)">E_bat = SUM(P*t) / eta_sys</text>
+    <text x="60" y="148" font-family="'Share Tech Mono',monospace" font-size="10" fill="rgba(0,212,255,0.14)">CD = CD0 + CL^2/(pi*AR*e)</text>
+    <text x="840" y="820" font-family="'Share Tech Mono',monospace" font-size="10" fill="rgba(255,184,0,0.13)">W_bat = E*1000 / (SED*eta)</text>
+
+    <!-- Telemetry readout top-left (below nav) -->
+    <text x="60" y="200" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,212,255,0.3)">SYS_ID: TRAIL-1_EVTOL</text>
+    <text x="60" y="218" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,212,255,0.25)">MTOW: 2161 kg</text>
+    <text x="60" y="236" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,212,255,0.22)">WING_SPAN: 12.77 m</text>
+    <text x="60" y="254" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,212,255,0.2)">CRUISE_V: 67 m/s</text>
+    <text x="60" y="272" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,212,255,0.18)">RANGE: 250 km</text>
+
+    <!-- Telemetry readout bottom-right -->
+    <text x="1300" y="700" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,255,157,0.28)" text-anchor="end">HOVER_PWR: 287 kW</text>
+    <text x="1300" y="718" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,255,157,0.24)" text-anchor="end">BATTERY: 300 Wh/kg</text>
+    <text x="1300" y="736" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,255,157,0.22)" text-anchor="end">STATIC_MARGIN: 22.5%</text>
+    <text x="1300" y="754" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,255,157,0.2)" text-anchor="end">L/D: 14.0</text>
+    <text x="1300" y="772" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(0,255,157,0.28)" text-anchor="end">STATUS: FEASIBLE</text>
+
+    <!-- HUD corner brackets -->
+    <polyline points="60,58 60,88 90,88" fill="none" stroke="rgba(0,212,255,0.22)" stroke-width="1.2"/>
+    <polyline points="1380,58 1380,88 1350,88" fill="none" stroke="rgba(0,212,255,0.22)" stroke-width="1.2"/>
+    <polyline points="60,842 60,812 90,812" fill="none" stroke="rgba(0,212,255,0.22)" stroke-width="1.2"/>
+    <polyline points="1380,842 1380,812 1350,812" fill="none" stroke="rgba(0,212,255,0.22)" stroke-width="1.2"/>
+
+    <!-- Vignette overlay -->
+    <rect width="1440" height="900" fill="url(#vignette)"/>
+  </svg>
 
   <div class="hero-content">
     <div class="hero-eyebrow">Aerospace Systems Engineer &nbsp;·&nbsp; Fairborn, OH</div>
@@ -278,9 +313,7 @@ section{position:relative;z-index:2;padding:96px 10vw;}
       <span class="last">SIRIGIREDDY</span>
     </h1>
     <div class="hero-title">Graduate Research Assistant · Wright State University</div>
-    <p class="hero-desc">
-      Specializing in <strong>MBSE-driven eVTOL design</strong>, multidisciplinary aircraft sizing, and computational aerodynamics. Bridging MATLAB, SysML, and OpenVSP to advance the next generation of Advanced Air Mobility.
-    </p>
+    <p class="hero-desc">Specializing in <strong>MBSE-driven eVTOL design</strong>, multidisciplinary aircraft sizing, and computational aerodynamics. Bridging MATLAB, SysML, and OpenVSP to advance the next generation of Advanced Air Mobility.</p>
     <div class="hero-stats">
       <div><div class="hero-stat-val">3.7</div><div class="hero-stat-label">M.S. GPA</div></div>
       <div class="hero-divider"></div>
@@ -297,51 +330,32 @@ section{position:relative;z-index:2;padding:96px 10vw;}
     </div>
   </div>
 
-  <!-- PROFILE PHOTO -->
   <div class="hero-photo-wrap">
-    <div style="position:relative;width:250px;height:250px;">
-      <div class="photo-orbit-ring"></div>
-      <div class="photo-glow-ring"></div>
+    <div class="photo-frame">
+      <div class="photo-ring2"></div>
+      <div class="photo-ring"></div>
       <div class="photo-inner">
-        <!--
-          TO ADD YOUR PHOTO:
-          1. Rename your photo to:  photo.jpg
-          2. Upload it to the GitHub repo (same folder as index.html)
-          3. It will appear here automatically
-        -->
         <img src="./photo.jpg" alt="Vinay Kumar Reddy Sirigireddy"
-          onerror="this.style.display='none';document.getElementById('ph').style.display='flex';">
+          onerror="this.style.display='none';document.getElementById('ph').style.display='flex'">
         <div id="ph" class="photo-placeholder" style="display:none;">
           <div class="photo-placeholder-icon">👤</div>
           <div class="photo-placeholder-text">UPLOAD photo.jpg<br>TO YOUR REPO</div>
         </div>
       </div>
     </div>
-    <!-- Radar rings behind -->
-    <svg class="radar-bg" viewBox="0 0 340 340">
-      <circle cx="170" cy="170" r="155" fill="none" stroke="#00D4FF" stroke-width=".7"/>
-      <circle cx="170" cy="170" r="116" fill="none" stroke="#00D4FF" stroke-width=".5"/>
-      <circle cx="170" cy="170" r="77" fill="none" stroke="#00D4FF" stroke-width=".5"/>
-      <circle cx="170" cy="170" r="38" fill="none" stroke="#00D4FF" stroke-width=".5"/>
-      <line x1="170" y1="15" x2="170" y2="325" stroke="#00D4FF" stroke-width=".4"/>
-      <line x1="15" y1="170" x2="325" y2="170" stroke="#00D4FF" stroke-width=".4"/>
-      <defs><radialGradient id="rg"><stop offset="0%" stop-color="#00D4FF" stop-opacity=".4"/><stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/></radialGradient></defs>
-      <path id="rsweep" fill="url(#rg)"/>
-    </svg>
   </div>
 
   <div class="scroll-hint"><div class="scroll-arrow"></div>SCROLL DOWN</div>
 </section>
 
-<!-- ══════════════════ ABOUT ══════════════════ -->
 <section id="about">
   <div class="section-eyebrow">01 // About</div>
   <h2 class="section-title">Engineer. <span>Researcher.</span> Builder.</h2>
   <div class="grid">
     <div class="about-text reveal from-left">
       <p>I'm a <strong>Graduate Research Assistant</strong> at Wright State University's Aerospace Systems Engineering program, working under Dean Darryl Ahner on eVTOL development within a <strong>Model-Based Systems Engineering (MBSE) framework</strong>.</p>
-      <p>My work sits at the intersection of <strong>computational aircraft design, multidisciplinary optimization, and digital engineering</strong> — building the tools that enable next-generation Advanced Air Mobility. I integrate MATLAB sizing physics, SysML system architecture, and OpenVSP geometry generation into coherent, traceable design workflows.</p>
-      <p>From hover rotor analysis and battery energy budgets to fuselage structural layouts and V-tail authority checks, I build end-to-end parametric tools that close the loop between early concept and physics-validated design.</p>
+      <p>My work sits at the intersection of <strong>computational aircraft design, multidisciplinary optimization, and digital engineering</strong> — building the tools that enable next-generation Advanced Air Mobility.</p>
+      <p>From hover rotor analysis and battery energy budgets to V-tail authority checks, I build end-to-end parametric tools that close the loop between early concept and physics-validated design.</p>
       <div class="highlight-box">
         <div>▸ CO-AUTHORING: AIAA Journal of Aircraft — Integrated eVTOL Sizing Frameworks</div>
         <div style="margin-top:6px">▸ BUILT: Full eVTOL sizing app — 10 analysis tabs, PDF report, OpenVSP export</div>
@@ -373,7 +387,6 @@ section{position:relative;z-index:2;padding:96px 10vw;}
   </div>
 </section>
 
-<!-- ══════════════════ SKILLS ══════════════════ -->
 <section id="skills">
   <div class="section-eyebrow">02 // Technical Skills</div>
   <h2 class="section-title">Technical <span>Arsenal</span></h2>
@@ -401,26 +414,19 @@ section{position:relative;z-index:2;padding:96px 10vw;}
     </div>
     <div class="skill-category reveal from-bottom delay-3" data-num="04">
       <div class="skill-category-title">⚡ Propulsion & Energy</div>
-      <div class="tech-tags">
-        <span class="tech-tag">Actuator Disk Theory</span><span class="tech-tag">Battery Sizing</span><span class="tech-tag">eVTOL Hover Power</span><span class="tech-tag">NASA CEA</span><span class="tech-tag">Ion Thrusters</span><span class="tech-tag">Hybrid Propulsion</span><span class="tech-tag">Specific Impulse</span><span class="tech-tag">O/F Analysis</span><span class="tech-tag">PMSM Motor Sizing</span><span class="tech-tag">Rotor Blade Design</span>
-      </div>
+      <div class="tech-tags"><span class="tech-tag">Actuator Disk Theory</span><span class="tech-tag">Battery Sizing</span><span class="tech-tag">eVTOL Hover Power</span><span class="tech-tag">NASA CEA</span><span class="tech-tag">Ion Thrusters</span><span class="tech-tag">Hybrid Propulsion</span><span class="tech-tag">Specific Impulse</span><span class="tech-tag">O/F Analysis</span><span class="tech-tag">PMSM Motor Sizing</span><span class="tech-tag">Rotor Blade Design</span></div>
     </div>
     <div class="skill-category reveal from-bottom delay-4" data-num="05">
       <div class="skill-category-title">🛰 Mission & Systems</div>
-      <div class="tech-tags">
-        <span class="tech-tag">Systems Tool Kit (STK)</span><span class="tech-tag">Orbit Modeling</span><span class="tech-tag">Mission Energy Budgets</span><span class="tech-tag">Range-Payload</span><span class="tech-tag">V-n Diagrams</span><span class="tech-tag">CG Envelope</span><span class="tech-tag">Static Margin</span><span class="tech-tag">V-Tail Sizing</span><span class="tech-tag">Raymer Methods</span><span class="tech-tag">NDARC Validation</span>
-      </div>
+      <div class="tech-tags"><span class="tech-tag">Systems Tool Kit (STK)</span><span class="tech-tag">Orbit Modeling</span><span class="tech-tag">Mission Energy Budgets</span><span class="tech-tag">Range-Payload</span><span class="tech-tag">V-n Diagrams</span><span class="tech-tag">CG Envelope</span><span class="tech-tag">Static Margin</span><span class="tech-tag">V-Tail Sizing</span><span class="tech-tag">Raymer Methods</span><span class="tech-tag">NDARC Validation</span></div>
     </div>
     <div class="skill-category reveal from-bottom delay-2" data-num="06">
       <div class="skill-category-title">◐ Research & Soft Skills</div>
-      <div class="tech-tags">
-        <span class="tech-tag">Technical Writing</span><span class="tech-tag">AIAA Publication</span><span class="tech-tag">Trade Study Design</span><span class="tech-tag">MDO</span><span class="tech-tag">Design Reviews</span><span class="tech-tag">Conceptual Sizing</span><span class="tech-tag">PLM Workflows</span><span class="tech-tag">ASME Member</span><span class="tech-tag">Team Leadership</span><span class="tech-tag">Cross-func. Collab</span>
-      </div>
+      <div class="tech-tags"><span class="tech-tag">Technical Writing</span><span class="tech-tag">AIAA Publication</span><span class="tech-tag">Trade Study Design</span><span class="tech-tag">MDO</span><span class="tech-tag">Design Reviews</span><span class="tech-tag">Conceptual Sizing</span><span class="tech-tag">PLM Workflows</span><span class="tech-tag">ASME Member</span><span class="tech-tag">Team Leadership</span><span class="tech-tag">Cross-func. Collab</span></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════ EXPERIENCE ══════════════════ -->
 <section id="experience">
   <div class="section-eyebrow">03 // Experience</div>
   <h2 class="section-title">Professional <span>Experience</span></h2>
@@ -433,11 +439,10 @@ section{position:relative;z-index:2;padding:96px 10vw;}
       </div>
       <ul class="timeline-bullets">
         <li>Developed an integrated <strong>MATLAB–MBSE framework</strong> to automate preliminary weight, power, and energy estimation for eVTOL aircraft concepts.</li>
-        <li>Linked high-fidelity numerical scripts with <strong>CATIA Magic SysML</strong> to track Technical Performance Measures (TPMs) across iterative design phases.</li>
-        <li>Built a <strong>10-tab interactive eVTOL sizing web application</strong> with real-time physics engine, drag buildup, stability analysis, V-tail sizing, OpenVSP export, and PDF report generation — deployed to GitHub Pages.</li>
-        <li>Generated <strong>parametric aircraft geometries in OpenVSP</strong> for sizing trade studies — validated against Joby S4, Archer Midnight, and NASA NDARC benchmarks.</li>
-        <li>Built system architectures using MBSE to evaluate <strong>propulsion–battery–flight control interactions</strong> and identify single-point failures.</li>
-        <li>Co-authoring a research manuscript for the <strong>AIAA Journal of Aircraft</strong> on integrated eVTOL sizing frameworks.</li>
+        <li>Linked numerical scripts with <strong>CATIA Magic SysML</strong> to track Technical Performance Measures across iterative design phases.</li>
+        <li>Built a <strong>10-tab interactive eVTOL sizing web application</strong> with real-time physics, drag buildup, stability, V-tail, OpenVSP export, and PDF report — deployed on GitHub Pages.</li>
+        <li>Generated <strong>parametric geometries in OpenVSP</strong> validated against Joby S4, Archer Midnight, and NASA NDARC benchmarks.</li>
+        <li>Co-authoring a manuscript for the <strong>AIAA Journal of Aircraft</strong> on integrated eVTOL sizing frameworks.</li>
       </ul>
     </div>
     <div class="timeline-item reveal from-left delay-1">
@@ -447,8 +452,8 @@ section{position:relative;z-index:2;padding:96px 10vw;}
         <div class="timeline-period">MAY 2021 — DEC 2021</div>
       </div>
       <ul class="timeline-bullets">
-        <li>Investigated <strong>ion thrusters and hybrid propulsion</strong> using NASA CEA to evaluate specific impulse (Isp) and combustion performance.</li>
-        <li>Performed studies on liquid propellant combinations (RP-1/Al + LOX) — identified optimal O/F ratio range with ~12% efficiency improvement.</li>
+        <li>Investigated <strong>ion thrusters and hybrid propulsion</strong> using NASA CEA to evaluate Isp and combustion performance.</li>
+        <li>Identified optimal O/F ratio for RP-1/Al + LOX with ~12% efficiency improvement over baseline.</li>
       </ul>
     </div>
     <div class="timeline-item reveal from-left delay-2">
@@ -458,60 +463,58 @@ section{position:relative;z-index:2;padding:96px 10vw;}
         <div class="timeline-period">AUG 2020 — JAN 2021</div>
       </div>
       <ul class="timeline-bullets">
-        <li>Modeled <strong>satellite orbits and aircraft trajectories in STK</strong> to evaluate mission performance under operational constraints.</li>
-        <li>Analyzed trajectory optimization scenarios for multi-vehicle mission planning with coverage analysis.</li>
+        <li>Modeled <strong>satellite orbits and aircraft trajectories in STK</strong> under operational constraints.</li>
+        <li>Analyzed trajectory optimization for multi-vehicle mission planning with coverage analysis.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════ PROJECTS ══════════════════ -->
 <section id="projects">
   <div class="section-eyebrow">04 // Projects</div>
   <h2 class="section-title">Project <span>Portfolio</span></h2>
   <div class="projects-grid">
     <div class="project-card featured reveal from-bottom">
       <div class="corner-tl"></div><div class="corner-br"></div>
-      <div class="project-featured-badge">★ Flagship Project</div>
+      <div class="project-featured-badge">FLAGSHIP PROJECT</div>
       <div class="project-card-num">PROJECT 01</div>
       <div class="project-card-title">MBSE-Integrated eVTOL Sizing Framework & Web Application</div>
-      <div class="project-card-desc">Full-stack eVTOL conceptual sizing platform with 10 analysis modules — ISA atmosphere, drag buildup, stability analysis, V-tail sizing, CG travel envelope, wing planform visualization, convergence plots, and OpenVSP export. Physics validated against Joby S4, Archer Midnight, and NASA NDARC. Features PDF report with LaTeX equations. Live on GitHub Pages.</div>
-      <div class="project-tags"><span class="project-tag">MATLAB</span><span class="project-tag">React / JSX</span><span class="project-tag">OpenVSP</span><span class="project-tag">MBSE</span><span class="project-tag">AIAA Journal</span><span class="project-tag">Raymer Methods</span><span class="project-tag">NDARC Validated</span></div>
+      <div class="project-card-desc">Full-stack eVTOL conceptual sizing with 10 modules — ISA atmosphere, drag buildup, stability, V-tail sizing, CG envelope, wing planform, OpenVSP export, PDF report with LaTeX equations. Validated against Joby S4, Archer Midnight, NASA NDARC.</div>
+      <div class="project-tags"><span class="project-tag">MATLAB</span><span class="project-tag">React</span><span class="project-tag">OpenVSP</span><span class="project-tag">MBSE</span><span class="project-tag">AIAA Journal</span><span class="project-tag">NDARC Validated</span></div>
     </div>
     <div class="project-card reveal from-right delay-1">
       <div class="project-card-num">PROJECT 02</div>
       <div class="project-card-title">Hoverbike Propulsion CFD & Propeller Design</div>
-      <div class="project-card-desc">CFD analysis using Cradle CFD to evaluate aerodynamic interference of overlapped propeller configurations. Designed 2-bladed and toroidal propellers in SOLIDWORKS; quantified thrust-to-power trade-offs for AAM.</div>
-      <div class="project-tags"><span class="project-tag">Cradle CFD</span><span class="project-tag">SOLIDWORKS</span><span class="project-tag">Thrust Analysis</span><span class="project-tag">AAM</span></div>
+      <div class="project-card-desc">CFD analysis (Cradle) of overlapped propeller configurations. Designed 2-bladed and toroidal propellers in SOLIDWORKS.</div>
+      <div class="project-tags"><span class="project-tag">Cradle CFD</span><span class="project-tag">SOLIDWORKS</span><span class="project-tag">AAM</span></div>
     </div>
     <div class="project-card reveal from-bottom delay-1">
       <div class="project-card-num">PROJECT 03</div>
       <div class="project-card-title">FEA — Hoverbike Duct Structural Optimization</div>
-      <div class="project-card-desc">FEA using HyperMesh to assess structural integrity under flight loads. Evaluated carbon fiber composites vs. 6-series aluminum to reduce weight while maintaining safety factors.</div>
-      <div class="project-tags"><span class="project-tag">HyperMesh</span><span class="project-tag">FEA</span><span class="project-tag">Carbon Fiber</span><span class="project-tag">Weight Reduction</span></div>
+      <div class="project-card-desc">HyperMesh FEA for structural integrity under flight loads. Carbon fiber vs. 6-series aluminum evaluation.</div>
+      <div class="project-tags"><span class="project-tag">HyperMesh</span><span class="project-tag">FEA</span><span class="project-tag">Carbon Fiber</span></div>
     </div>
     <div class="project-card reveal from-left delay-2">
       <div class="project-card-num">PROJECT 04</div>
       <div class="project-card-title">Solid Propellant Combustion Analysis (NASA CEA)</div>
-      <div class="project-card-desc">Simulated combustion performance of AP/Al propellants using NASA CEA. Sensitivity analysis on O/F ratios identified optimal range (1.5–2.0) with ~12% efficiency gain over baseline.</div>
-      <div class="project-tags"><span class="project-tag">NASA CEA</span><span class="project-tag">AP/Al Propellant</span><span class="project-tag">O/F Optimization</span><span class="project-tag">Isp</span></div>
+      <div class="project-card-desc">AP/Al propellant simulation. O/F sensitivity identified optimal range (1.5–2.0) with ~12% efficiency gain.</div>
+      <div class="project-tags"><span class="project-tag">NASA CEA</span><span class="project-tag">O/F Optimization</span><span class="project-tag">Isp</span></div>
     </div>
     <div class="project-card reveal from-bottom delay-2">
       <div class="project-card-num">PROJECT 05</div>
       <div class="project-card-title">Full-Scale Hoverbike Design & Fabrication (Published)</div>
-      <div class="project-card-desc">Lead Designer and Team Lead for a full-scale hoverbike prototype with overlapping propeller configuration. Performed aerodynamic and propulsion calculations; published in IJISRT journal.</div>
-      <div class="project-tags"><span class="project-tag">Lead Designer</span><span class="project-tag">Fabrication</span><span class="project-tag">IJISRT Published</span><span class="project-tag">Propulsion</span></div>
+      <div class="project-card-desc">Lead Designer for full-scale hoverbike prototype. Results published in IJISRT journal.</div>
+      <div class="project-tags"><span class="project-tag">Lead Designer</span><span class="project-tag">IJISRT Published</span></div>
     </div>
     <div class="project-card reveal from-right delay-3">
       <div class="project-card-num">PROJECT 06</div>
       <div class="project-card-title">20-Seater Business Jet — Capstone Design</div>
-      <div class="project-card-desc">Full conceptual sizing, configuration layout, and preliminary structural design benchmarked against the Gulfstream G500 — covering aerodynamics, propulsion selection, and weight estimation.</div>
-      <div class="project-tags"><span class="project-tag">Conceptual Design</span><span class="project-tag">Gulfstream G500</span><span class="project-tag">Weight Sizing</span><span class="project-tag">Config Layout</span></div>
+      <div class="project-card-desc">Conceptual sizing benchmarked against Gulfstream G500. Aerodynamics, propulsion, and weight estimation.</div>
+      <div class="project-tags"><span class="project-tag">Conceptual Design</span><span class="project-tag">Gulfstream G500</span></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════ EDUCATION ══════════════════ -->
 <section id="education">
   <div class="section-eyebrow">05 // Education</div>
   <h2 class="section-title">Academic <span>Credentials</span></h2>
@@ -542,7 +545,6 @@ section{position:relative;z-index:2;padding:96px 10vw;}
   </div>
 </section>
 
-<!-- ══════════════════ CERTIFICATIONS ══════════════════ -->
 <section id="certifications">
   <div class="section-eyebrow">06 // Certifications</div>
   <h2 class="section-title">Certifications & <span>Qualifications</span></h2>
@@ -556,441 +558,110 @@ section{position:relative;z-index:2;padding:96px 10vw;}
     <div class="cert-card reveal from-scale delay-3"><div class="cert-icon">🔢</div><div class="cert-name">MATLAB Certified</div><div class="cert-issuer">MathWorks</div></div>
     <div class="cert-card reveal from-scale delay-4"><div class="cert-icon">🛰</div><div class="cert-name">Systems Tool Kit (STK)</div><div class="cert-issuer">SS Technologies</div></div>
     <div class="cert-card reveal from-scale delay-2"><div class="cert-icon">📐</div><div class="cert-name">AutoCAD Certified</div><div class="cert-issuer">Verzeo</div></div>
-    <div class="cert-card reveal from-scale delay-3"><div class="cert-icon">🏭</div><div class="cert-name">Manufacturing Process Technology I & II</div><div class="cert-issuer">NPTEL</div></div>
-    <div class="cert-card reveal from-scale delay-4"><div class="cert-icon">🎯</div><div class="cert-name">Product Dev. & Systems Engineering</div><div class="cert-issuer">Udemy</div></div>
+    <div class="cert-card reveal from-scale delay-3"><div class="cert-icon">🏭</div><div class="cert-name">Manufacturing Process Technology I &amp; II</div><div class="cert-issuer">NPTEL</div></div>
+    <div class="cert-card reveal from-scale delay-4"><div class="cert-icon">🎯</div><div class="cert-name">Product Dev. &amp; Systems Engineering</div><div class="cert-issuer">Udemy</div></div>
     <div class="cert-card reveal from-scale delay-5"><div class="cert-icon">🔩</div><div class="cert-name">SOLIDWORKS Associate</div><div class="cert-issuer">CSWA · Dassault Systèmes</div></div>
   </div>
 </section>
 
-<!-- ══════════════════ CONTACT ══════════════════ -->
 <section id="contact">
   <div class="section-eyebrow">07 // Contact</div>
   <h2 class="section-title" style="margin-bottom:18px">Get In <span>Touch</span></h2>
   <div class="contact-inner">
-    <p class="contact-tagline reveal from-bottom">Open to research collaborations, full-time aerospace engineering roles, and Advanced Air Mobility / eVTOL design opportunities. Let's build the future of flight together.</p>
+    <p class="contact-tagline reveal from-bottom">Open to research collaborations, full-time aerospace engineering roles, and AAM / eVTOL design opportunities. Let's build the future of flight together.</p>
     <div class="contact-links reveal from-bottom delay-1">
-      <a href="mailto:sirigireddyvinaykumarreddy@gmail.com" class="contact-link"><span class="contact-link-icon">✉</span>sirigireddyvinaykumarreddy@gmail.com</a>
-      <a href="tel:9375163412" class="contact-link"><span class="contact-link-icon">📞</span>(937) 516-3412</a>
-      <a href="https://www.linkedin.com/in/vinay-kumar-reddy-sirigireddy-ba98a82ba" target="_blank" class="contact-link"><span class="contact-link-icon">🔗</span>LinkedIn Profile</a>
-      <a href="https://vinay25112001.github.io/evtol-sizing-app-Wright-State-University/" target="_blank" class="contact-link" style="border-color:var(--cyan);color:var(--cyan)"><span class="contact-link-icon">🚀</span>Live eVTOL Tool</a>
-      <a href="./Vinay_Kumar_Reddy_Sirigireddy_Resume.pdf" download class="contact-link" style="border-color:var(--orange);color:var(--orange)"><span class="contact-link-icon">⬇</span>Download Resume</a>
+      <a href="mailto:sirigireddyvinaykumarreddy@gmail.com" class="contact-link"><span>✉</span>sirigireddyvinaykumarreddy@gmail.com</a>
+      <a href="tel:9375163412" class="contact-link"><span>📞</span>(937) 516-3412</a>
+      <a href="https://www.linkedin.com/in/vinay-kumar-reddy-sirigireddy-ba98a82ba" target="_blank" class="contact-link"><span>🔗</span>LinkedIn Profile</a>
+      <a href="https://vinay25112001.github.io/evtol-sizing-app-Wright-State-University/" target="_blank" class="contact-link" style="border-color:var(--cyan);color:var(--cyan)"><span>🚀</span>Live eVTOL Tool</a>
+      <a href="./Vinay_Kumar_Reddy_Sirigireddy_Resume.pdf" download class="contact-link" style="border-color:var(--orange);color:var(--orange)"><span>⬇</span>Download Resume</a>
     </div>
     <div class="footer-line reveal from-bottom delay-2">
       VINAY KUMAR REDDY SIRIGIREDDY · AEROSPACE SYSTEMS ENGINEER · WRIGHT STATE UNIVERSITY · 2026
-      <br><span style="color:var(--border)">&nbsp;// MBSE · eVTOL · AAM · MATLAB · SysML · OpenVSP</span>
+      <br><span style="color:var(--dim)">&nbsp;// MBSE · eVTOL · AAM · MATLAB · SysML · OpenVSP</span>
     </div>
   </div>
 </section>
 
 <script>
-// ══════════════════════════════════════════════════════
-//  AEROSPACE HERO CANVAS — eVTOL wireframe + particles
-// ══════════════════════════════════════════════════════
-(function () {
-  const canvas = document.getElementById('aero-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, mouse = { x: -999, y: -999 };
-  let particles = [], animFrameId;
-  let t = 0;
+var bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', function() {
+  bar.style.width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100, 100) + '%';
+}, {passive:true});
 
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  canvas.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left;
-    mouse.y = e.clientY - r.top;
-  });
-
-  // ── Colour palette
-  const C = {
-    cyan:   'rgba(0,212,255,',
-    green:  'rgba(0,255,157,',
-    orange: 'rgba(255,107,53,',
-    amber:  'rgba(255,184,0,',
-    white:  'rgba(240,248,255,',
-  };
-
-  // ── Particles (nodes of a flight-computer network)
-  function initParticles() {
-    particles = [];
-    const n = Math.min(70, Math.floor(W * H / 14000));
-    for (let i = 0; i < n; i++) {
-      particles.push({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - .5) * .35,
-        vy: (Math.random() - .5) * .35,
-        r: Math.random() * 1.8 + .6,
-        col: [C.cyan, C.cyan, C.cyan, C.green, C.amber][Math.floor(Math.random() * 5)],
-        pulse: Math.random() * Math.PI * 2,
-      });
-    }
-  }
-  initParticles();
-  window.addEventListener('resize', initParticles);
-
-  function drawParticles() {
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      p.pulse += .02;
-      const glow = .4 + .3 * Math.sin(p.pulse);
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.col + glow + ')';
-      ctx.fill();
-    });
-    // Connect nearby particles
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i], b = particles[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxD = 130;
-        if (dist < maxD) {
-          const alpha = (1 - dist / maxD) * 0.22;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = C.cyan + alpha + ')';
-          ctx.lineWidth = .6;
-          ctx.stroke();
-        }
-      }
-      // Mouse interaction
-      const mx = particles[i].x - mouse.x, my = particles[i].y - mouse.y;
-      const md = Math.sqrt(mx * mx + my * my);
-      if (md < 150) {
-        const alpha = (1 - md / 150) * 0.5;
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = C.cyan + alpha + ')';
-        ctx.lineWidth = .8;
-        ctx.stroke();
-      }
-    }
-  }
-
-  // ── eVTOL wireframe drawing (lift+cruise configuration)
-  function drawEVTOL(cx, cy, scale, alpha) {
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(scale, scale);
-    ctx.globalAlpha = alpha;
-
-    const lw = 1.2;
-
-    // Fuselage
-    ctx.beginPath();
-    ctx.moveTo(-110, -8); ctx.lineTo(-80, -14);
-    ctx.lineTo(60, -14); ctx.lineTo(110, -4);
-    ctx.lineTo(100, 8); ctx.lineTo(-80, 8);
-    ctx.closePath();
-    ctx.strokeStyle = C.cyan + '0.9)';
-    ctx.lineWidth = lw;
-    ctx.stroke();
-    ctx.fillStyle = C.cyan + '0.04)';
-    ctx.fill();
-
-    // Nose cone detail
-    ctx.beginPath();
-    ctx.moveTo(-110, -8); ctx.lineTo(-130, 0); ctx.lineTo(-110, 8);
-    ctx.strokeStyle = C.cyan + '0.7)';
-    ctx.lineWidth = lw * .8;
-    ctx.stroke();
-
-    // Main wing (upper)
-    ctx.beginPath();
-    ctx.moveTo(-10, -14); ctx.lineTo(-20, -62);
-    ctx.lineTo(30, -62); ctx.lineTo(40, -14);
-    ctx.closePath();
-    ctx.strokeStyle = C.cyan + '0.85)';
-    ctx.lineWidth = lw;
-    ctx.stroke();
-    ctx.fillStyle = C.cyan + '0.05)';
-    ctx.fill();
-
-    // Main wing (lower mirror)
-    ctx.beginPath();
-    ctx.moveTo(-10, 8); ctx.lineTo(-20, 56);
-    ctx.lineTo(30, 56); ctx.lineTo(40, 8);
-    ctx.closePath();
-    ctx.strokeStyle = C.cyan + '0.85)';
-    ctx.lineWidth = lw;
-    ctx.stroke();
-    ctx.fillStyle = C.cyan + '0.05)';
-    ctx.fill();
-
-    // Wing chord lines
-    [-40, -20, 0, 20].forEach(x => {
-      ctx.beginPath();
-      ctx.moveTo(x, -62); ctx.lineTo(x + 8, -14);
-      ctx.strokeStyle = C.cyan + '0.18)';
-      ctx.lineWidth = .5; ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(x, 56); ctx.lineTo(x + 8, 8);
-      ctx.stroke();
-    });
-
-    // V-tail panels
-    const vtG = 45 * Math.PI / 180;
-    const vtL = 38;
-    // Left panel
-    ctx.beginPath();
-    ctx.moveTo(80, 0);
-    ctx.lineTo(80 - vtL * Math.cos(vtG), -vtL * Math.sin(vtG));
-    ctx.lineTo(110 - vtL * Math.cos(vtG), -vtL * Math.sin(vtG));
-    ctx.lineTo(110, 0);
-    ctx.closePath();
-    ctx.strokeStyle = C.orange + '0.7)';
-    ctx.lineWidth = lw * .9;
-    ctx.stroke();
-    ctx.fillStyle = C.orange + '0.04)';
-    ctx.fill();
-    // Right panel
-    ctx.beginPath();
-    ctx.moveTo(80, 0);
-    ctx.lineTo(80 - vtL * Math.cos(vtG), vtL * Math.sin(vtG));
-    ctx.lineTo(110 - vtL * Math.cos(vtG), vtL * Math.sin(vtG));
-    ctx.lineTo(110, 0);
-    ctx.closePath();
-    ctx.strokeStyle = C.orange + '0.7)';
-    ctx.lineWidth = lw * .9;
-    ctx.stroke();
-    ctx.fillStyle = C.orange + '0.04)';
-    ctx.fill();
-
-    // Hover rotors (6 total, 3 each side)
-    const rotorPositions = [
-      [-20, -62], [5, -62], [30, -62],
-      [-20,  56], [5,  56], [30,  56],
-    ];
-    const rotorR = 14;
-    const rotSpin = t * 4;
-    rotorPositions.forEach(([rx, ry], idx) => {
-      // Disk
-      ctx.beginPath();
-      ctx.arc(rx, ry, rotorR, 0, Math.PI * 2);
-      ctx.strokeStyle = C.green + '0.5)';
-      ctx.lineWidth = .7; ctx.stroke();
-      ctx.fillStyle = C.green + '0.03)'; ctx.fill();
-      // Spinning blade
-      const spin = rotSpin + idx * (Math.PI / 3);
-      ctx.save();
-      ctx.translate(rx, ry);
-      ctx.rotate(spin);
-      ctx.beginPath();
-      ctx.moveTo(-rotorR + 2, 0); ctx.lineTo(rotorR - 2, 0);
-      ctx.strokeStyle = C.green + '0.7)';
-      ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.rotate(Math.PI / 2);
-      ctx.beginPath();
-      ctx.moveTo(-rotorR + 2, 0); ctx.lineTo(rotorR - 2, 0);
-      ctx.strokeStyle = C.green + '0.5)';
-      ctx.lineWidth = .8; ctx.stroke();
-      ctx.restore();
-      // Hub dot
-      ctx.beginPath();
-      ctx.arc(rx, ry, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = C.green + '0.9)'; ctx.fill();
-    });
-
-    // Cruise propeller (nose)
-    ctx.save();
-    ctx.translate(-130, 0);
-    ctx.rotate(t * 6);
-    [-1, 1].forEach(s => {
-      ctx.beginPath();
-      ctx.moveTo(0, 0); ctx.lineTo(0, s * 22);
-      ctx.strokeStyle = C.cyan + '0.7)';
-      ctx.lineWidth = 2; ctx.stroke();
-    });
-    ctx.restore();
-    ctx.beginPath();
-    ctx.arc(-130, 0, 4, 0, Math.PI * 2);
-    ctx.fillStyle = C.cyan + '0.8)'; ctx.fill();
-
-    // Dimension lines
-    ctx.setLineDash([3, 4]);
-    ctx.lineWidth = .5;
-    // Wingspan dimension
-    ctx.beginPath();
-    ctx.moveTo(-20, -72); ctx.lineTo(30, -72);
-    ctx.strokeStyle = C.amber + '0.4)';
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(-20, -68); ctx.lineTo(-20, -76);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(30, -68); ctx.lineTo(30, -76);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Label
-    ctx.font = '8px "Share Tech Mono",monospace';
-    ctx.fillStyle = C.amber + '0.55)';
-    ctx.textAlign = 'center';
-    ctx.fillText('b/2 = 6.4m', 5, -79);
-
-    // Fuselage length label
-    ctx.setLineDash([3, 4]);
-    ctx.beginPath();
-    ctx.moveTo(-130, 16); ctx.lineTo(110, 16);
-    ctx.strokeStyle = C.amber + '0.3)'; ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = C.amber + '0.45)';
-    ctx.fillText('Lf = 7.2 m', -10, 26);
-
-    ctx.restore();
-  }
-
-  // ── Blueprint grid (background)
-  function drawGrid() {
-    const step = 50;
-    ctx.lineWidth = .3;
-    for (let x = 0; x < W; x += step) {
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H);
-      ctx.strokeStyle = 'rgba(0,212,255,0.04)'; ctx.stroke();
-    }
-    for (let y = 0; y < H; y += step) {
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y);
-      ctx.strokeStyle = 'rgba(0,212,255,0.04)'; ctx.stroke();
-    }
-    // Major grid every 250px
-    ctx.lineWidth = .5;
-    for (let x = 0; x < W; x += 250) {
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H);
-      ctx.strokeStyle = 'rgba(0,212,255,0.07)'; ctx.stroke();
-    }
-    for (let y = 0; y < H; y += 250) {
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y);
-      ctx.strokeStyle = 'rgba(0,212,255,0.07)'; ctx.stroke();
-    }
-  }
-
-  // ── Floating equations
-  const equations = [
-    { text: 'T = MTOW × g₀', x: .72, y: .12, col: C.cyan, a: .18 },
-    { text: 'P_hov = T^(3/2) / √(2ρA)', x: .68, y: .22, col: C.cyan, a: .14 },
-    { text: 'SM = (x_NP − x_CG) / MAC', x: .70, y: .78, col: C.green, a: .16 },
-    { text: 'E_total = Σ P_i × t_i / η', x: .05, y: .80, col: C.amber, a: .15 },
-    { text: 'CD = CD₀ + CL²/(π·AR·e)', x: .04, y: .18, col: C.cyan, a: .13 },
-    { text: 'W_bat = E × 1000 / (SED × η_bat)', x: .60, y: .88, col: C.amber, a: .12 },
-  ];
-  function drawEquations() {
-    equations.forEach(eq => {
-      const flicker = eq.a * (0.7 + 0.3 * Math.sin(t * .8 + eq.x * 10));
-      ctx.font = '10px "Share Tech Mono",monospace';
-      ctx.fillStyle = eq.col + flicker + ')';
-      ctx.textAlign = 'left';
-      ctx.fillText(eq.text, eq.x * W, eq.y * H);
-    });
-  }
-
-  // ── Corner HUD frames
-  function drawHUDCorners() {
-    const size = 28, pad = 16, lw = 1.2;
-    const corners = [
-      [pad, pad + 60, 1, 1], [W - pad, pad + 60, -1, 1],
-      [pad, H - pad, 1, -1], [W - pad, H - pad, -1, -1],
-    ];
-    ctx.lineWidth = lw;
-    corners.forEach(([x, y, sx, sy]) => {
-      ctx.strokeStyle = 'rgba(0,212,255,0.25)';
-      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + sx * size, y); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + sy * size); ctx.stroke();
-    });
-  }
-
-  // ── Scanning beam
-  function drawScanLine() {
-    const yPos = (Math.sin(t * .4) * .5 + .5) * H;
-    const grad = ctx.createLinearGradient(0, yPos - 30, 0, yPos + 30);
-    grad.addColorStop(0, 'rgba(0,212,255,0)');
-    grad.addColorStop(.5, 'rgba(0,212,255,0.05)');
-    grad.addColorStop(1, 'rgba(0,212,255,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, yPos - 30, W, 60);
-  }
-
-  // ── Main render loop
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    t += 0.016;
-
-    drawGrid();
-    drawScanLine();
-    drawParticles();
-    drawEquations();
-    drawHUDCorners();
-
-    // Draw eVTOL — anchored to right side, slightly drifting
-    const drift = Math.sin(t * .3) * 12;
-    const evtolX = W * 0.62;
-    const evtolY = H * 0.50 + drift;
-    const scl = Math.min(W, H) / 680;
-    drawEVTOL(evtolX, evtolY, scl, 0.72);
-
-    // Subtle vignette
-    const vig = ctx.createRadialGradient(W/2, H/2, H*.3, W/2, H/2, H*.85);
-    vig.addColorStop(0, 'rgba(3,8,16,0)');
-    vig.addColorStop(1, 'rgba(3,8,16,0.65)');
-    ctx.fillStyle = vig;
-    ctx.fillRect(0, 0, W, H);
-
-    animFrameId = requestAnimationFrame(render);
-  }
-  render();
-})();
-
-// Progress bar
-const bar = document.getElementById('progress-bar');
-window.addEventListener('scroll', () => {
-  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  bar.style.width = Math.min(pct, 100) + '%';
-});
-
-// Nav shrink + active links
-const mainNav = document.getElementById('main-nav');
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
+var mainNav = document.getElementById('main-nav');
+var sections = document.querySelectorAll('section[id]');
+var navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', function() {
   mainNav.classList.toggle('scrolled', window.scrollY > 60);
-  let cur = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
-  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
-}, { passive: true });
+  var cur = '';
+  sections.forEach(function(s){ if(window.scrollY >= s.offsetTop - 140) cur = s.id; });
+  navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+}, {passive:true});
 
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if(e.isIntersecting) {
       e.target.classList.add('visible');
-      e.target.querySelectorAll('.skill-bar-fill').forEach(b => {
+      e.target.querySelectorAll('.skill-bar-fill').forEach(function(b) {
         b.style.width = (b.dataset.w || 0) + '%';
       });
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}, {threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 
-// Radar sweep animation
-(function () {
-  const sw = document.getElementById('rsweep');
-  if (!sw) return;
-  let a = 0;
-  const cx = 170, cy = 170, r = 155;
+// Animated canvas for particle network
+(function() {
+  var canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;';
+  document.getElementById('hero').appendChild(canvas);
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [], t = 0, mx = -999, my = -999;
+  function resize(){ W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', function(){ resize(); initP(); });
+  document.getElementById('hero').addEventListener('mousemove', function(e){
+    var r = canvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top;
+  });
+  function initP() {
+    particles = [];
+    var n = Math.min(60, Math.floor(W * H / 14000));
+    var cols = ['rgba(0,212,255,','rgba(0,212,255,','rgba(0,255,157,','rgba(255,184,0,'];
+    for(var i = 0; i < n; i++) {
+      particles.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
+        r:Math.random()*1.5+.5, col:cols[Math.floor(Math.random()*cols.length)], ph:Math.random()*6.28});
+    }
+  }
+  initP();
   function frame() {
-    a = (a + 1.8) % 360;
-    const a1 = a * Math.PI / 180;
-    const a2 = (a - 58) * Math.PI / 180;
-    const x1 = cx + r * Math.sin(a1), y1 = cy - r * Math.cos(a1);
-    const x2 = cx + r * Math.sin(a2), y2 = cy - r * Math.cos(a2);
-    sw.setAttribute('d', `M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,0 ${x2},${y2} Z`);
+    ctx.clearRect(0,0,W,H);
+    t += 0.016;
+    for(var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
+      if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
+      p.ph += 0.018;
+      var g = 0.3 + 0.25 * Math.sin(p.ph);
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28);
+      ctx.fillStyle = p.col + g + ')'; ctx.fill();
+      for(var j = i+1; j < particles.length; j++) {
+        var q = particles[j];
+        var dx = p.x-q.x, dy = p.y-q.y, d = Math.sqrt(dx*dx+dy*dy);
+        if(d < 120) {
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle = 'rgba(0,212,255,'+ ((1-d/120)*.18) +')';
+          ctx.lineWidth = .5; ctx.stroke();
+        }
+      }
+      var mdx = p.x-mx, mdy = p.y-my, md = Math.sqrt(mdx*mdx+mdy*mdy);
+      if(md < 150) {
+        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mx,my);
+        ctx.strokeStyle = 'rgba(0,212,255,'+ ((1-md/150)*.4) +')';
+        ctx.lineWidth = .7; ctx.stroke();
+      }
+    }
     requestAnimationFrame(frame);
   }
   frame();
