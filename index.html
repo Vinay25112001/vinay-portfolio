@@ -250,11 +250,17 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
 
 /* ── Tablet (768–1000px) ── */
 @media(max-width:1000px) and (min-width:768px){
-  .hero-photo-wrap{display:none;}
   nav{padding:12px 24px;}
   .nav-links{display:none;}
   section{padding:80px 6vw;}
-  #hero{padding:100px 6vw;min-height:auto;}
+  #hero{padding:120px 6vw 60px;min-height:auto;display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .hero-photo-wrap{position:relative;right:auto;top:auto;transform:none;margin-bottom:28px;order:-1;}
+  .photo-glass-outer{width:180px;height:180px;}
+  .photo-glass-frame{width:180px;height:180px;}
+  .hero-content{max-width:100%;order:0;}
+  .hero-stats{justify-content:center;}
+  .hero-ctas{justify-content:center;}
+  .scroll-hint{position:relative;bottom:auto;left:auto;transform:none;margin-top:24px;order:1;}
   .hero-name{font-size:38px;}
   .hero-desc{font-size:14px;}
   #about .grid{grid-template-columns:1fr;}
@@ -273,10 +279,17 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
 
 /* ── Large Phone (480–768px) ── */
 @media(max-width:768px) and (min-width:480px){
-  .hero-photo-wrap{display:none;}
   nav{padding:10px 16px;}
   .nav-links{display:none;}
   .nav-logo{font-size:12px;}
+  .hero-photo-wrap{position:relative;right:auto;top:auto;transform:none;margin-bottom:24px;order:-1;}
+  .photo-glass-outer{width:155px;height:155px;}
+  .photo-glass-frame{width:155px;height:155px;}
+  #hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:90px 5vw 50px;}
+  .hero-content{max-width:100%;order:0;}
+  .hero-stats{justify-content:center;}
+  .hero-ctas{align-items:center;justify-content:center;}
+  .scroll-hint{position:relative;bottom:auto;left:auto;transform:none;margin-top:20px;order:1;}
   section{padding:70px 5vw;}
   #hero{padding:90px 5vw 60px;min-height:auto;}
   .hero-eyebrow{font-size:10px;}
@@ -308,10 +321,17 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
 
 /* ── Small Phone (max 480px — iPhone SE, small Android) ── */
 @media(max-width:480px){
-  .hero-photo-wrap{display:none;}
   nav{padding:10px 14px;}
   .nav-links{display:none;}
   .nav-logo{font-size:11px;letter-spacing:.1em;}
+  .hero-photo-wrap{position:relative;right:auto;top:auto;transform:none;margin-bottom:20px;order:-1;}
+  .photo-glass-outer{width:130px;height:130px;}
+  .photo-glass-frame{width:130px;height:130px;}
+  #hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:80px 4vw 44px;}
+  .hero-content{max-width:100%;order:0;}
+  .hero-stats{justify-content:center;}
+  .hero-ctas{align-items:center;justify-content:center;}
+  .scroll-hint{position:relative;bottom:auto;left:auto;transform:none;margin-top:18px;order:1;}
   .nav-status{font-size:8px;}
   section{padding:60px 4vw;}
   #hero{padding:80px 4vw 50px;min-height:auto;}
