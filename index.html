@@ -162,7 +162,7 @@ nav.scrolled{padding:10px 52px;background:rgba(4,8,15,0.88);}
 
 /* ── PHOTO ── */
 .hero-photo-wrap{position:absolute;right:8vw;top:50%;transform:translateY(-50%);z-index:3;}
-.photo-glass-outer{width:270px;height:270px;position:relative;display:flex;align-items:center;justify-content:center;overflow:visible;}
+.photo-glass-outer{width:270px;height:270px;position:relative;display:flex;align-items:center;justify-content:center;}
 /* scan ring, pulse ring, orbit dots all via JS */
 .photo-scan-line{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(56,189,248,0.7),transparent);border-radius:2px;pointer-events:none;z-index:10;}
 .photo-glass-frame{width:270px;height:270px;border-radius:38% 62% 54% 46%/46% 40% 60% 54%;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border:1px solid rgba(255,255,255,0.12);padding:5px;position:relative;overflow:hidden;box-shadow:0 8px 48px rgba(14,165,233,0.1),inset 0 1px 0 rgba(255,255,255,0.14);}
@@ -234,11 +234,10 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
 
 /* highlight box rows */
 .highlight-row{
-  display:flex;align-items:center;gap:10px;
+  display:flex;align-items:baseline;gap:10px;
   font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);
   line-height:1.9;
 }
-.highlight-row-text{ flex:1; }
 .highlight-row + .highlight-row{margin-top:4px;}
 .highlight-tag{
   font-size:8px;font-weight:700;letter-spacing:.12em;
@@ -247,38 +246,11 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   color:var(--cyan);
 }
 
-/* Download pill button on journal row */
-.highlight-dl{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:3px 10px;border-radius:20px;flex-shrink:0;
-  font-family:'Share Tech Mono',monospace;font-size:8px;font-weight:700;
-  letter-spacing:.1em;text-decoration:none;
-  background:rgba(245,158,11,0.1);
-  border:1px solid rgba(245,158,11,0.28);
-  color:#f59e0b;
-  transition:background .25s,border-color .25s,box-shadow .25s,transform .2s;
-  white-space:nowrap;
-}
-.highlight-dl:hover{
-  background:rgba(245,158,11,0.22);
-  border-color:rgba(251,191,36,0.55);
-  box-shadow:0 0 12px rgba(245,158,11,0.35);
-  transform:translateY(-2px);
-  color:#fde68a;
-}
-
-.highlight-box{
-  margin-top:22px;padding:18px 22px;
-  background:rgba(14,165,233,0.04);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(14,165,233,0.10);
-  border-radius:14px;position:relative;overflow:visible;
-}
-.highlight-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,0.3),transparent);border-radius:14px 14px 0 0;}
-
 #about .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
 .about-text p{font-size:15px;color:var(--text);line-height:1.9;margin-bottom:16px;}
 .about-text p strong{color:var(--cyan);}
+.highlight-box{margin-top:22px;padding:18px 22px;background:rgba(14,165,233,0.05);backdrop-filter:blur(12px);border:1px solid rgba(14,165,233,0.12);border-radius:14px;position:relative;overflow:hidden;}
+.highlight-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(14,165,233,0.25),transparent);}
 
 .about-panels{ position:relative;display:flex;flex-direction:column;gap:12px; }
 .info-panel{ padding:18px 22px;transition:box-shadow .35s; }
@@ -666,12 +638,10 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
       <p>My work sits at the intersection of <strong>computational aircraft design, multidisciplinary optimization, and digital engineering</strong> — building the tools that enable next-generation Advanced Air Mobility.</p>
       <p>From hover rotor analysis and battery energy budgets to V-tail authority checks, I build end-to-end parametric tools that close the loop between early concept and physics-validated design.</p>
 
-      <div class="gold-grid" style="position:relative;">
-        <div class="highlight-box" id="highlight-box">
-        <div class="highlight-row"><span class="highlight-tag">PAPER</span><span class="highlight-row-text">Co-authoring — AIAA Journal of Aircraft, Integrated eVTOL Sizing Frameworks</span></div>
-        <div class="highlight-row"><span class="highlight-tag">APP</span><span class="highlight-row-text">Full eVTOL sizing tool — 10 analysis tabs, PDF report, OpenVSP export</span></div>
-        <div class="highlight-row"><span class="highlight-tag">JOURNAL</span><span class="highlight-row-text">Hoverbike propulsion research — IJISRT peer-reviewed publication</span><a href="./Hoverbike_Propulsion_Research_IJISRT.pdf" download class="highlight-dl">⬇ DOWNLOAD</a></div>
-      </div>
+      <div class="highlight-box">
+        <div class="highlight-row"><span class="highlight-tag">PAPER</span>Co-authoring — AIAA Journal of Aircraft, Integrated eVTOL Sizing Frameworks</div>
+        <div class="highlight-row"><span class="highlight-tag">APP</span>Full eVTOL sizing tool — 10 analysis tabs, PDF report, OpenVSP export</div>
+        <div class="highlight-row"><span class="highlight-tag">JOURNAL</span>Hoverbike propulsion research — IJISRT peer-reviewed publication</div>
       </div>
     </div>
 
@@ -1127,201 +1097,86 @@ function startCounter(el){
 setTimeout(function(){ document.querySelectorAll('#hs .count-num').forEach(startCounter); },820);
 
 // ═══════════════════════════════════════════════
-// PHOTO ANIMATIONS — Gold bubble orbit system
+// PHOTO ANIMATIONS
 // ═══════════════════════════════════════════════
 (function(){
   var pgo = document.getElementById('pgo');
   if(!pgo) return;
-  var W = pgo.offsetWidth || 270;
-  var CX = W/2, CY = W/2;
 
-  /* ── helpers ── */
-  function mk(tag){ return document.createElement(tag||'div'); }
-  function css(el,s){ el.style.cssText=s; pgo.appendChild(el); return el; }
-
-  /* ── 1. Concentric glow rings (breathing) ── */
-  var ringCfg = [
-    {off:-16, col:'rgba(251,191,36,0.30)', w:'1.5px', dash:''},
-    {off:-34, col:'rgba(56,189,248,0.18)', w:'1px',   dash:'6,8'},
-    {off:-58, col:'rgba(20,184,166,0.10)', w:'1px',   dash:'2,14'},
-    {off:-82, col:'rgba(251,191,36,0.07)', w:'1px',   dash:''},
+  // Three concentric rings at different radii
+  var ringData=[
+    {off:-20, col:'rgba(56,189,248,0.18)', dash:''},
+    {off:-38, col:'rgba(20,184,166,0.1)',  dash:'6,8'},
+    {off:-58, col:'rgba(56,189,248,0.06)', dash:'2,12'},
   ];
-  var rings = ringCfg.map(function(rc){
-    var el=mk(); pgo.insertBefore(el,pgo.firstChild);
-    el.style.cssText='position:absolute;border-radius:50%;pointer-events:none;'
-      +'inset:'+rc.off+'px;border:'+rc.w+' solid '+rc.col+';'
-      +(rc.dash?'border-style:dashed;border-dasharray:'+rc.dash+';':'');
-    return el;
+  var rings=[];
+  ringData.forEach(function(rd){
+    var r=document.createElement('div');
+    r.style.cssText='position:absolute;border-radius:50%;pointer-events:none;border:1px solid '+rd.col+';'
+      +(rd.dash?'border-style:dashed;':'');
+    r.style.inset=rd.off+'px';
+    pgo.insertBefore(r, pgo.firstChild);
+    rings.push(r);
   });
 
-  /* ── 2. Gold bubble particles on orbit paths ── */
-  // 8 bubbles on inner ring, 5 on outer — staggered
-  function makeBubble(radius, speed, phase, size, color, glow){
-    var el=mk();
-    el.style.cssText='position:absolute;border-radius:50%;pointer-events:none;z-index:11;'
-      +'width:'+size+'px;height:'+size+'px;'
-      +'background:'+color+';'
-      +'box-shadow:'+glow+';';
-    pgo.appendChild(el);
-    return {el:el, r:radius, spd:speed, a:phase, sz:size};
-  }
-  var bubbles=[];
-  // Inner ring — 8 gold bubbles
-  for(var i=0;i<8;i++){
-    var phase=i*(360/8);
-    var sz=4+2*Math.sin(i*1.3);
-    bubbles.push(makeBubble(
-      148, 0.55+Math.random()*0.15, phase, sz,
-      'radial-gradient(circle at 35% 35%,#fde68a,#f59e0b)',
-      '0 0 8px rgba(245,158,11,0.9),0 0 16px rgba(251,191,36,0.5)'
-    ));
-  }
-  // Outer ring — 5 cyan bubbles (counter-rotate)
-  for(var j=0;j<5;j++){
-    var phase2=j*(360/5)+20;
-    var sz2=3+1.5*Math.cos(j*0.8);
-    bubbles.push(makeBubble(
-      175, -0.30-Math.random()*0.1, phase2, sz2,
-      'radial-gradient(circle at 35% 35%,#e0f2fe,#38bdf8)',
-      '0 0 6px rgba(56,189,248,0.9),0 0 12px rgba(14,165,233,0.4)'
-    ));
-  }
-  // Middle ring — 3 teal sparkles
-  for(var k=0;k<3;k++){
-    bubbles.push(makeBubble(
-      160, 0.20+Math.random()*0.12, k*120+60, 2.5,
-      '#2dd4bf',
-      '0 0 5px rgba(45,212,191,1),0 0 10px rgba(20,184,166,0.6)'
-    ));
-  }
+  // Two orbit dots at different speeds and radii
+  var dots=[];
+  [0,1].forEach(function(i){
+    var d=document.createElement('div');
+    d.style.cssText='position:absolute;border-radius:50%;pointer-events:none;z-index:10;';
+    d.style.width  = i===0 ? '9px' : '6px';
+    d.style.height = i===0 ? '9px' : '6px';
+    d.style.background = i===0 ? 'var(--cyan)' : 'var(--teal)';
+    d.style.boxShadow  = i===0 ? '0 0 12px var(--cyan),0 0 24px rgba(56,189,248,0.4)' : '0 0 8px var(--teal)';
+    pgo.appendChild(d);
+    dots.push({el:d, radius: i===0 ? 155 : 175, speed: i===0 ? 0.38 : -0.22, angle: i*180});
+  });
 
-  /* ── 3. Rotating golden arc (2 sweeping arcs) ── */
-  var arcCanvas=mk('canvas');
-  arcCanvas.width=W+180; arcCanvas.height=W+180;
-  arcCanvas.style.cssText='position:absolute;pointer-events:none;z-index:9;'
-    +'left:'+(-(180/2))+'px;top:'+(-(180/2))+'px;opacity:.75;';
-  pgo.insertBefore(arcCanvas, pgo.firstChild);
-  var actx=arcCanvas.getContext('2d');
-
-  /* ── 4. Scan line ── */
+  // Scan line
   var sl=document.getElementById('psl');
   var scanPos=0, scanDir=1;
 
-  /* ── 5. Multi-pulse rings ── */
-  var pulses=[];
-  for(var p=0;p<3;p++){
-    var pel=mk();
-    pel.style.cssText='position:absolute;border-radius:50%;border:1.5px solid rgba(251,191,36,0.55);pointer-events:none;z-index:1;opacity:0;';
-    pgo.appendChild(pel);
-    pulses.push({el:pel, phase:p*(1/3)});
-  }
+  // Pulse ring — expands and fades
+  var pulse=document.createElement('div');
+  pulse.style.cssText='position:absolute;border-radius:50%;border:1px solid rgba(56,189,248,0.4);pointer-events:none;z-index:1;opacity:0;';
+  pgo.appendChild(pulse);
+  var pulsePhase=0;
 
-  /* ── 6. Outer halo (breathing golden glow on the frame) ── */
-  var frame=document.getElementById('pgf');
-
-  /* ── animation loop ── */
-  var t0=performance.now();
-  function animPhoto(now){
-    var t=(now-t0)*0.001; // seconds
-
-    /* rings breathe */
+  function animPhoto(){
+    // orbit dots
+    dots.forEach(function(d){
+      d.angle+=d.speed;
+      var rad=d.angle*Math.PI/180;
+      var cx=pgo.offsetWidth/2, cy=pgo.offsetHeight/2;
+      d.el.style.left=(cx+d.radius*Math.sin(rad)-parseFloat(d.el.style.width)/2)+'px';
+      d.el.style.top =(cy-d.radius*Math.cos(rad)-parseFloat(d.el.style.height)/2)+'px';
+    });
+    // rings gentle pulse scale
     rings.forEach(function(r,i){
-      var s=1+0.018*Math.sin(t*0.7+i*1.4);
+      var s=1+0.015*Math.sin(Date.now()/2000+(i*1.2));
       r.style.transform='scale('+s+')';
     });
-
-    /* frame golden halo breathe */
-    if(frame){
-      var glow=0.18+0.12*Math.sin(t*1.1);
-      frame.style.boxShadow=
-        '0 8px 48px rgba(14,165,233,0.10),'
-        +'inset 0 1px 0 rgba(255,255,255,0.14),'
-        +'0 0 '+(30+18*Math.sin(t*0.9))+'px rgba(251,191,36,'+glow.toFixed(3)+'),'
-        +'0 0 '+(60+30*Math.sin(t*0.7+1))+'px rgba(245,158,11,'+(glow*0.45).toFixed(3)+')';
-    }
-
-    /* bubbles orbit */
-    bubbles.forEach(function(b){
-      b.a+=b.spd;
-      var rad=b.a*Math.PI/180;
-      /* slight wobble on radius */
-      var r=b.r+6*Math.sin(t*1.2+b.a*0.05);
-      var x=CX+r*Math.sin(rad)-b.sz/2;
-      var y=CY-r*Math.cos(rad)-b.sz/2;
-      b.el.style.left=x+'px'; b.el.style.top=y+'px';
-      /* size pulse */
-      var sc=0.85+0.3*Math.abs(Math.sin(t*1.5+b.a*0.02));
-      b.el.style.transform='scale('+sc+')';
-    });
-
-    /* sweeping arcs */
-    var AW=arcCanvas.width, AH=arcCanvas.height;
-    var ACX=AW/2, ACY=AH/2;
-    actx.clearRect(0,0,AW,AH);
-    // Arc 1 — gold, fast
-    var a1s=t*0.6, a1e=a1s+1.1;
-    var grd1=actx.createLinearGradient(
-      ACX+Math.cos(a1s)*(W/2+60),ACY+Math.sin(a1s)*(W/2+60),
-      ACX+Math.cos(a1e)*(W/2+60),ACY+Math.sin(a1e)*(W/2+60)
-    );
-    grd1.addColorStop(0,'rgba(251,191,36,0)');
-    grd1.addColorStop(0.5,'rgba(251,191,36,0.7)');
-    grd1.addColorStop(1,'rgba(251,191,36,0)');
-    actx.beginPath();
-    actx.arc(ACX,ACY,W/2+60,a1s,a1e);
-    actx.strokeStyle=grd1; actx.lineWidth=2.5; actx.stroke();
-
-    // Arc 2 — cyan, slower, opposite
-    var a2s=-t*0.38+Math.PI, a2e=a2s+0.85;
-    var grd2=actx.createLinearGradient(
-      ACX+Math.cos(a2s)*(W/2+80),ACY+Math.sin(a2s)*(W/2+80),
-      ACX+Math.cos(a2e)*(W/2+80),ACY+Math.sin(a2e)*(W/2+80)
-    );
-    grd2.addColorStop(0,'rgba(56,189,248,0)');
-    grd2.addColorStop(0.5,'rgba(56,189,248,0.55)');
-    grd2.addColorStop(1,'rgba(56,189,248,0)');
-    actx.beginPath();
-    actx.arc(ACX,ACY,W/2+80,a2s,a2e);
-    actx.strokeStyle=grd2; actx.lineWidth=1.8; actx.stroke();
-
-    // Arc 3 — teal, small inner, medium speed
-    var a3s=t*0.45+2, a3e=a3s+0.6;
-    actx.beginPath();
-    actx.arc(ACX,ACY,W/2+30,a3s,a3e);
-    var grd3=actx.createLinearGradient(
-      ACX+Math.cos(a3s)*(W/2+30),ACY+Math.sin(a3s)*(W/2+30),
-      ACX+Math.cos(a3e)*(W/2+30),ACY+Math.sin(a3e)*(W/2+30)
-    );
-    grd3.addColorStop(0,'rgba(45,212,191,0)');
-    grd3.addColorStop(0.5,'rgba(45,212,191,0.5)');
-    grd3.addColorStop(1,'rgba(45,212,191,0)');
-    actx.strokeStyle=grd3; actx.lineWidth=1.5; actx.stroke();
-
-    /* scan line */
+    // scan line
     if(sl){
-      scanPos+=scanDir*0.4;
-      if(scanPos>W) scanDir=-1;
+      scanPos+=scanDir*0.45;
+      if(scanPos>270) scanDir=-1;
       if(scanPos<0){ scanDir=1; scanPos=0; }
       sl.style.top=scanPos+'px';
-      sl.style.opacity=String(0.45*(1-Math.abs(scanPos-W/2)/(W/2)));
+      sl.style.opacity=String(0.4*(1-Math.abs(scanPos-135)/135));
     }
-
-    /* pulse rings */
-    pulses.forEach(function(pu){
-      pu.phase=(pu.phase+0.006)%1;
-      var pp=pu.phase;
-      var ps=1+pp*0.9;
-      var op=0.5*(1-pp);
-      pu.el.style.width=W+'px'; pu.el.style.height=W+'px';
-      pu.el.style.left=((pgo.offsetWidth-W)/2)+'px';
-      pu.el.style.top =((pgo.offsetHeight-W)/2)+'px';
-      pu.el.style.transform='scale('+ps+')';
-      pu.el.style.opacity=String(op);
-    });
+    // pulse ring
+    pulsePhase+=0.008;
+    var pp=(pulsePhase%1);
+    var ps=1+pp*0.7;
+    pulse.style.width='270px'; pulse.style.height='270px';
+    pulse.style.left=((pgo.offsetWidth-270)/2)+'px';
+    pulse.style.top =((pgo.offsetHeight-270)/2)+'px';
+    pulse.style.transform='scale('+ps+')';
+    pulse.style.opacity=String(0.35*(1-pp));
 
     requestAnimationFrame(animPhoto);
   }
-  requestAnimationFrame(animPhoto);
+  animPhoto();
 })();
 
 // ═══════════════════════════════════════════════
