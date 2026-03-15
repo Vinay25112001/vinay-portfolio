@@ -713,7 +713,7 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   <div class="contact-inner">
     <p class="contact-tagline reveal from-bottom">Open to research collaborations, full-time aerospace engineering roles, and AAM / eVTOL design opportunities. Let's build the future of flight together.</p>
     <div class="contact-links reveal from-bottom delay-1">
-      <a href="/cdn-cgi/l/email-protection#23504a514a444a514647475a554a4d425a48564e4251514647475a63444e424a4f0d404c4e" class="contact-link"><span>✉</span><span><span class="__cf_email__" data-cfemail="0d7e647f646a647f686969747b64636c746678606c7f7f686969744d6a606c6461236e6260">[email&#160;protected]</span></span></a>
+      <a id="email-lnk" class="contact-link" href="#"><span>✉</span><span id="email-txt"></span></a>
       <a href="tel:9375163412" class="contact-link"><span>📞</span>(937) 516-3412</a>
       <a href="https://www.linkedin.com/in/vinay-kumar-reddy-sirigireddy-ba98a82ba" target="_blank" class="contact-link"><span>🔗</span>LinkedIn Profile</a>
       <a href="https://vinay25112001.github.io/evtol-sizing-app-Wright-State-University/" target="_blank" class="contact-link" style="border-color:rgba(56,189,248,0.22);color:var(--cyan)"><span>🚀</span>Live eVTOL Tool</a>
@@ -1037,6 +1037,7 @@ document.querySelectorAll('.ripple-wrap').forEach(function(wrap) {
 }());
 </script>
 
+
 <script>
 (function(){
   var u = 'sirigireddyvina' + 'ykumarreddy';
@@ -1044,7 +1045,7 @@ document.querySelectorAll('.ripple-wrap').forEach(function(wrap) {
   var e = u + '@' + d;
   var a = document.getElementById('email-lnk');
   var t = document.getElementById('email-txt');
-  if(a){ a.href = 'mail' + 'to:' + e; }
+  if(a){ a.setAttribute('href', 'mail' + 'to:' + e); }
   if(t){ t.textContent = e; }
 })();
 </script>
