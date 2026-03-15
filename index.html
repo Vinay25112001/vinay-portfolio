@@ -86,7 +86,8 @@ nav.scrolled{padding:10px 52px;background:rgba(4,8,15,0.85);}
 .photo-ring-a{position:absolute;inset:-22px;border-radius:50%;border:1px solid rgba(56,189,248,0.14);}
 .photo-ring-b{position:absolute;inset:-42px;border-radius:50%;border:1px dashed rgba(20,184,166,0.09);}
 .orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);pointer-events:none;}
-.photo-glass-frame{width:270px;height:270px;border-radius:38% 62% 54% 46%/46% 40% 60% 54%;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border:1px solid rgba(255,255,255,0.12);padding:5px;position:relative;overflow:hidden;box-shadow:0 8px 48px rgba(14,165,233,0.1),inset 0 1px 0 rgba(255,255,255,0.14);}
+@keyframes floatPhoto{0%{transform:translateY(0px);}50%{transform:translateY(-18px);}100%{transform:translateY(0px);}}
+.photo-glass-frame{width:270px;height:270px;border-radius:38% 62% 54% 46%/46% 40% 60% 54%;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border:1px solid rgba(255,255,255,0.12);padding:5px;position:relative;overflow:hidden;box-shadow:0 8px 48px rgba(14,165,233,0.1),inset 0 1px 0 rgba(255,255,255,0.14);animation:floatPhoto 4s ease-in-out infinite;}
 .photo-glass-frame::before{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,0.06),transparent);z-index:1;pointer-events:none;border-radius:inherit;}
 .photo-inner{width:100%;height:100%;border-radius:36% 64% 52% 48%/44% 38% 62% 56%;overflow:hidden;position:relative;z-index:2;}
 .photo-inner img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
@@ -108,11 +109,11 @@ section{position:relative;z-index:2;padding:100px 10vw;}
 section:nth-child(even){background:rgba(255,255,255,0.01);}
 
 /* REVEAL */
-.reveal{opacity:0;transition:opacity .8s ease,transform .8s ease;}
-.reveal.from-bottom{transform:translateY(40px);}
-.reveal.from-left{transform:translateX(-44px);}
-.reveal.from-right{transform:translateX(44px);}
-.reveal.from-scale{transform:scale(.92);}
+.reveal{opacity:1;transition:opacity .8s ease,transform .8s ease;}
+.reveal.from-bottom{transform:translateY(0);}
+.reveal.from-left{transform:translateX(0);}
+.reveal.from-right{transform:translateX(0);}
+.reveal.from-scale{transform:scale(1);}
 .reveal.visible{opacity:1;transform:none!important;}
 .delay-1{transition-delay:.1s;}.delay-2{transition-delay:.2s;}.delay-3{transition-delay:.3s;}.delay-4{transition-delay:.4s;}.delay-5{transition-delay:.5s;}
 
@@ -225,6 +226,20 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   .project-card.featured{grid-column:span 1;}
   .cert-grid{grid-template-columns:repeat(2,1fr);}
 }
+
+/* ── SMOOTH SCROLL ANIMATIONS ── */
+@keyframes sectionFadeUp  { from{opacity:0;transform:translateY(55px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideInLeft    { from{opacity:0;transform:translateX(-55px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slideInRight   { from{opacity:0;transform:translateX(55px)} to{opacity:1;transform:translateX(0)} }
+@keyframes scaleUpIn      { from{opacity:0;transform:scale(0.88)} to{opacity:1;transform:scale(1)} }
+.sa { opacity:0; }
+.sa.vis { opacity:1; }
+.anim-fadeup    { animation: sectionFadeUp 0.75s cubic-bezier(0.22,1,0.36,1) forwards; }
+.anim-left      { animation: slideInLeft   0.75s cubic-bezier(0.22,1,0.36,1) forwards; }
+.anim-right     { animation: slideInRight  0.75s cubic-bezier(0.22,1,0.36,1) forwards; }
+.anim-scale     { animation: scaleUpIn     0.70s cubic-bezier(0.22,1,0.36,1) forwards; }
+.ad1{animation-delay:.05s} .ad2{animation-delay:.13s} .ad3{animation-delay:.21s}
+.ad4{animation-delay:.29s} .ad5{animation-delay:.37s} .ad6{animation-delay:.45s}
 </style>
 </head>
 <body>
@@ -254,9 +269,9 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
     <div class="hero-title" id="ht">Graduate Research Assistant · Wright State University</div>
     <p class="hero-desc" id="hd">Specializing in <strong>MBSE-driven eVTOL design</strong>, multidisciplinary aircraft sizing, and computational aerodynamics. Bridging MATLAB, SysML, and OpenVSP to advance the next generation of Advanced Air Mobility.</p>
     <div class="hero-stats" id="hs">
-      <div class="hero-stat"><div class="hero-stat-val"><span class="count-num" data-target="3.7" data-dec="1">0</span></div><div class="hero-stat-label">M.S. GPA</div></div>
-      <div class="hero-stat"><div class="hero-stat-val"><span class="count-num" data-target="2" data-suffix="+">0</span></div><div class="hero-stat-label">Yrs Research</div></div>
-      <div class="hero-stat"><div class="hero-stat-val"><span class="count-num" data-target="10" data-suffix="+">0</span></div><div class="hero-stat-label">Tools</div></div>
+      <div class="hero-stat"><div class="hero-stat-val"><span class="count-num" data-target="3.7" data-dec="1">3.7</span></div><div class="hero-stat-label">M.S. GPA</div></div>
+      <div class="hero-stat"><div class="hero-stat-val"><span class="count-num" data-target="2" data-suffix="+">2+</span></div><div class="hero-stat-label">Yrs Research</div></div>
+      <div class="hero-stat"><div class="hero-stat-val"><span class="count-num" data-target="10" data-suffix="+">10+</span></div><div class="hero-stat-label">Tools</div></div>
       <div class="hero-stat"><div class="hero-stat-val">AAM</div><div class="hero-stat-label">Domain</div></div>
     </div>
     <div class="hero-ctas" id="hc">
@@ -302,7 +317,7 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
       <div class="highlight-box">
         <div>▸ CO-AUTHORING: AIAA Journal of Aircraft — Integrated eVTOL Sizing Frameworks</div>
         <div style="margin-top:6px">▸ BUILT: Full eVTOL sizing app — 10 analysis tabs, PDF report, OpenVSP export</div>
-        <div style="margin-top:6px">▸ PUBLISHED: Hoverbike propulsion research — IJISRT Journal</div>
+        <div style="margin-top:6px;display:flex;align-items:center;justify-content:space-between;">▸ PUBLISHED: Hoverbike propulsion research — IJISRT Journal <a href="./Hoverbike_Propulsion_Research_IJISRT.pdf" download style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.28);border-radius:20px;color:#f97316;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.1em;text-decoration:none;white-space:nowrap;" onmouseover="this.style.background='rgba(249,115,22,0.2)'" onmouseout="this.style.background='rgba(249,115,22,0.08)'">&#11015; DOWNLOAD</a></div>
       </div>
     </div>
     <div class="about-panels">
@@ -338,24 +353,24 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   <div class="skills-grid">
     <div class="skill-category gc reveal from-bottom" data-num="01"><div class="shimmer"></div>
       <div class="skill-category-title">⬡ MBSE & Programming</div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CATIA Magic / SysML</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="90"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>MATLAB / Aircraft Sizing</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="92"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>Python / Data Science</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>React / Web App Dev</span><span class="skill-bar-pct">76%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="76"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CATIA Magic / SysML</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="90" style="width:90%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>MATLAB / Aircraft Sizing</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="92" style="width:92%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>Python / Data Science</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80" style="width:80%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>React / Web App Dev</span><span class="skill-bar-pct">76%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="76" style="width:76%"></div></div></div>
     </div>
     <div class="skill-category gc reveal from-bottom delay-1" data-num="02"><div class="shimmer"></div>
       <div class="skill-category-title">✦ Aerospace Analysis</div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>OpenVSP Parametric Geometry</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="88"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>Aerodynamics & Performance</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="90"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CFD (Cradle / Ansys)</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>XFOIL / Airfoil Analysis</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>OpenVSP Parametric Geometry</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="88" style="width:88%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>Aerodynamics & Performance</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="90" style="width:90%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CFD (Cradle / Ansys)</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75" style="width:75%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>XFOIL / Airfoil Analysis</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80" style="width:80%"></div></div></div>
     </div>
     <div class="skill-category gc reveal from-bottom delay-2" data-num="03"><div class="shimmer"></div>
       <div class="skill-category-title">◈ CAD & Structural</div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>SOLIDWORKS (CSWP)</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="92"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CATIA V5</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="82"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>HyperMesh / FEA</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75"></div></div></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>AutoCAD / Fusion 360</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="85"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>SOLIDWORKS (CSWP)</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="92" style="width:92%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>CATIA V5</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="82" style="width:82%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>HyperMesh / FEA</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75" style="width:75%"></div></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-header"><span>AutoCAD / Fusion 360</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="85" style="width:85%"></div></div></div>
     </div>
     <div class="skill-category gc reveal from-bottom delay-3" data-num="04"><div class="shimmer"></div>
       <div class="skill-category-title">⚡ Propulsion & Energy</div>
@@ -519,7 +534,7 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   <div class="contact-inner">
     <p class="contact-tagline reveal from-bottom">Open to research collaborations, full-time aerospace engineering roles, and AAM / eVTOL design opportunities. Let's build the future of flight together.</p>
     <div class="contact-links reveal from-bottom delay-1">
-      <a href="mailto:sirigireddyvinaykumarreddy@gmail.com" class="contact-link"><span>✉</span>sirigireddyvinaykumarreddy@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#eb988299828c82998e8f8f929d82858a92809e868a99998e8f8f92ab8c868a8287c5888486" class="contact-link"><span>✉</span><span class="__cf_email__" data-cfemail="8bf8e2f9e2ece2f9eeefeff2fde2e5eaf2e0fee6eaf9f9eeefeff2cbece6eae2e7a5e8e4e6">[email&#160;protected]</span></a>
       <a href="tel:9375163412" class="contact-link"><span>📞</span>(937) 516-3412</a>
       <a href="https://www.linkedin.com/in/vinay-kumar-reddy-sirigireddy-ba98a82ba" target="_blank" class="contact-link"><span>🔗</span>LinkedIn Profile</a>
       <a href="https://vinay25112001.github.io/evtol-sizing-app-Wright-State-University/" target="_blank" class="contact-link" style="border-color:rgba(56,189,248,0.22);color:var(--cyan)"><span>🚀</span>Live eVTOL Tool</a>
@@ -532,7 +547,7 @@ section:nth-child(even){background:rgba(255,255,255,0.01);}
   </div>
 </section>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── PROGRESS BAR
 var bar = document.getElementById('progress-bar');
 window.addEventListener('scroll', function() {
@@ -781,15 +796,60 @@ document.querySelectorAll('.ripple-wrap').forEach(function(wrap) {
   var dot = document.getElementById('sdot');
   if(!dot) return;
   var pos = 0, dir = 1;
+  var step = 0.4;
   function bounce() {
-    pos += dir * .45;
-    if(pos > 15) dir = -1;
-    if(pos < 0) { dir = 1; pos = 0; }
-    dot.style.top = (7 + pos) + 'px';
-    dot.style.opacity = String(1 - pos / 18);
+    pos += step * dir;
+    if(pos > 14 || pos < 0) dir *= -1;
+    dot.style.top = pos + 'px';
     requestAnimationFrame(bounce);
   }
   bounce();
+})();
+</script>
+
+<script>
+(function(){
+  // Tag animatable elements in each section
+  document.querySelectorAll('section[id]').forEach(function(sec){
+    if(sec.id === 'hero') return;
+    var s = sec.querySelector('.section-eyebrow');
+    var t = sec.querySelector('.section-title');
+    if(s){ s.classList.add('sa'); s._ac='anim-fadeup'; }
+    if(t){ t.classList.add('sa'); t._ac='anim-fadeup'; t._ad='ad1'; }
+
+    var cards = sec.querySelectorAll('.gc');
+    cards.forEach(function(c,i){
+      c.classList.add('sa');
+      if(sec.id==='about') c._ac = (i%2===0) ? 'anim-left' : 'anim-right';
+      else if(sec.id==='experience') c._ac='anim-left';
+      else c._ac='anim-scale';
+      c._ad = 'ad'+(Math.min(i,5)+1);
+    });
+
+    sec.querySelectorAll('.timeline-item').forEach(function(el,i){
+      el.classList.add('sa'); el._ac='anim-left'; el._ad='ad'+(Math.min(i,5)+1);
+    });
+    sec.querySelectorAll('.about-text p,.highlight-box').forEach(function(el,i){
+      el.classList.add('sa'); el._ac='anim-left'; el._ad='ad'+(Math.min(i,5)+1);
+    });
+    sec.querySelectorAll('.contact-link').forEach(function(el,i){
+      el.classList.add('sa'); el._ac='anim-fadeup'; el._ad='ad'+(Math.min(i,5)+1);
+    });
+  });
+
+  // Observe and trigger
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      if(el._ac) el.classList.add(el._ac);
+      if(el._ad) el.classList.add(el._ad);
+      el.classList.add('vis');
+      obs.unobserve(el);
+    });
+  },{threshold:0.12, rootMargin:'0px 0px -50px 0px'});
+
+  document.querySelectorAll('.sa').forEach(function(el){ obs.observe(el); });
 })();
 </script>
 </body>
