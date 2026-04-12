@@ -1053,12 +1053,14 @@ section:nth-child(even) { background: var(--warm); }
     <div class="cert-card card fx d4" data-cert-key="3d-swym" data-cert-icon="🔷" data-cert-name="3D Swym Associate" data-cert-issuer="Dassault Systèmes"><div class="cert-icon" style="position:relative">🔷</div><div class="cert-name">3D Swym Associate</div><div class="cert-issuer">Dassault Systèmes</div></div>
     <div class="cert-card card fx d1" data-cert-key="python-ibm" data-cert-icon="🐍" data-cert-name="Python for Data Science &amp; AI" data-cert-issuer="IBM"><div class="cert-icon" style="position:relative">🐍</div><div class="cert-name">Python for Data Science &amp; AI</div><div class="cert-issuer">IBM</div></div>
     <div class="cert-card card fx d2" data-cert-key="aircraft-perf" data-cert-icon="✈️" data-cert-name="Aircraft Performance" data-cert-issuer="NPTEL"><div class="cert-icon" style="position:relative">✈️</div><div class="cert-name">Aircraft Performance</div><div class="cert-issuer">NPTEL</div></div>
-    <div class="cert-card card fx d3" data-cert-key="matlab-cert" data-cert-icon="🔢" data-cert-name="MATLAB Certified" data-cert-issuer="MathWorks"><div class="cert-icon" style="position:relative">🔢</div><div class="cert-name">MATLAB Certified</div><div class="cert-issuer">MathWorks</div></div>
-    <div class="cert-card card fx d4" data-cert-key="stk-cert" data-cert-icon="🛰" data-cert-name="Systems Tool Kit (STK)" data-cert-issuer="SS Technologies"><div class="cert-icon" style="position:relative">🛰</div><div class="cert-name">Systems Tool Kit (STK)</div><div class="cert-issuer">SS Technologies</div></div>
+    <div class="cert-card card fx d3" data-cert-key="stk-cert" data-cert-icon="🛰" data-cert-name="Systems Tool Kit (STK)" data-cert-issuer="SS Technologies"><div class="cert-icon" style="position:relative">🛰</div><div class="cert-name">Systems Tool Kit (STK)</div><div class="cert-issuer">SS Technologies</div></div>
     <div class="cert-card card fx d2" data-cert-key="autocad-cert" data-cert-icon="📐" data-cert-name="AutoCAD Certified" data-cert-issuer="Verzeo"><div class="cert-icon" style="position:relative">📐</div><div class="cert-name">AutoCAD Certified</div><div class="cert-issuer">Verzeo</div></div>
     <div class="cert-card card fx d3" data-cert-key="mfg-process" data-cert-icon="🏭" data-cert-name="Manufacturing Process Technology I &amp; II" data-cert-issuer="NPTEL"><div class="cert-icon" style="position:relative">🏭</div><div class="cert-name">Manufacturing Process Technology I &amp; II</div><div class="cert-issuer">NPTEL</div></div>
     <div class="cert-card card fx d4" data-cert-key="product-dev" data-cert-icon="🎯" data-cert-name="Product Dev. &amp; Systems Engineering" data-cert-issuer="Udemy"><div class="cert-icon" style="position:relative">🎯</div><div class="cert-name">Product Dev. &amp; Systems Engineering</div><div class="cert-issuer">Udemy</div></div>
     <div class="cert-card card fx d5" data-cert-key="solidworks-assoc" data-cert-icon="🔩" data-cert-name="SOLIDWORKS Associate" data-cert-issuer="CSWA · Dassault Systèmes"><div class="cert-icon" style="position:relative">🔩</div><div class="cert-name">SOLIDWORKS Associate</div><div class="cert-issuer">CSWA · Dassault Systèmes</div></div>
+    <div class="cert-card card fx d1" data-cert-key="abyom-rocket" data-cert-icon="🚀" data-cert-name="Rocket Science Orientation Program" data-cert-issuer="ABYOM SpaceTech &amp; Defence"><div class="cert-icon" style="position:relative">🚀</div><div class="cert-name">Rocket Science Orientation Program</div><div class="cert-issuer">ABYOM SpaceTech &amp; Defence</div></div>
+    <div class="cert-card card fx d2" data-cert-key="ncrtat-conf" data-cert-icon="📄" data-cert-name="Conference Presentation — NCRTAT 2023" data-cert-issuer="Bharath Institute of Higher Education &amp; Research"><div class="cert-icon" style="position:relative">📄</div><div class="cert-name">Conference Presentation — NCRTAT 2023</div><div class="cert-issuer">Bharath Institute of Higher Education &amp; Research</div></div>
+    <div class="cert-card card fx d3" data-cert-key="mars-propulsion" data-cert-icon="🛸" data-cert-name="Advance Propulsion Internship" data-cert-issuer="MARS Exploration Pvt Ltd"><div class="cert-icon" style="position:relative">🛸</div><div class="cert-name">Advance Propulsion Internship</div><div class="cert-issuer">MARS Exploration Pvt Ltd</div></div>
   </div>
 </section>
 
@@ -1244,17 +1246,43 @@ setTimeout(function(){
   var modalBody = document.getElementById('cert-modal-body');
 
   var STORE_PREFIX = 'vkrs_cert_';
+  var CERTS_FOLDER = './certs/';
   var adminMode = false;
   var clickCount = 0, clickTimer = null;
 
-  // Mark cards that already have images
+  // Try pdf first, then jpg
+  function certFolderPath(key, ext){ return CERTS_FOLDER + key + (ext || '.pdf'); }
+
+  function checkCertExists(key, cb){
+    // Try .pdf first, then .jpg
+    function tryExt(ext, fallbackExt){
+      var xhr = new XMLHttpRequest();
+      xhr.open('HEAD', certFolderPath(key, ext), true);
+      xhr.onload = function(){
+        if(xhr.status === 200){ cb(true, ext); }
+        else if(fallbackExt){ tryExt(fallbackExt, null); }
+        else { cb(false, null); }
+      };
+      xhr.onerror = function(){
+        if(fallbackExt){ tryExt(fallbackExt, null); }
+        else { cb(false, null); }
+      };
+      xhr.send();
+    }
+    tryExt('.pdf', '.jpg');
+  }
+
+  // Mark cards that already have images (localStorage OR certs/ folder)
   function refreshCardBadges(){
     document.querySelectorAll('.cert-card').forEach(function(card){
       var key = card.dataset.certKey;
       if(localStorage.getItem(STORE_PREFIX + key)){
         card.classList.add('cert-has-image');
       } else {
-        card.classList.remove('cert-has-image');
+        checkCertExists(key, function(exists){
+          if(exists) card.classList.add('cert-has-image');
+          else card.classList.remove('cert-has-image');
+        });
       }
     });
   }
@@ -1288,29 +1316,66 @@ setTimeout(function(){
     setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .4s'; setTimeout(function(){t.remove();},400); }, 2800);
   }
 
-  // Build modal HTML
+  // Build modal HTML — loads from certs/ folder (GitHub PDFs) or localStorage
   function buildModal(key, icon, name, issuer){
     var storedImg = localStorage.getItem(STORE_PREFIX + key);
     modalTitle.textContent = name;
 
-    if(storedImg){
-      // Show the real uploaded certificate image
+    function bindUploadRemove(){
+      var uploadInput = document.getElementById('cert-upload-input');
+      if(uploadInput){
+        uploadInput.addEventListener('change', function(){
+          var file = this.files[0];
+          if(!file) return;
+          if(file.size > 5*1024*1024){ showToast('\u26a0 File too large (max 5 MB)'); return; }
+          var reader = new FileReader();
+          reader.onload = function(ev){
+            try{
+              localStorage.setItem(STORE_PREFIX + key, ev.target.result);
+              refreshCardBadges();
+              buildModal(key, icon, name, issuer);
+              showToast('\u2705 Certificate image saved!');
+            } catch(err){
+              showToast('\u26a0 Storage full \u2014 try a smaller image');
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      var removeBtn = document.getElementById('cert-remove-btn');
+      if(removeBtn){
+        removeBtn.addEventListener('click', function(){
+          localStorage.removeItem(STORE_PREFIX + key);
+          refreshCardBadges();
+          buildModal(key, icon, name, issuer);
+          showToast('\ud83d\uddd1 Certificate image removed');
+        });
+      }
+    }
+
+    function renderSrc(src){
+      var isImg = src && (src.endsWith('.jpg') || src.endsWith('.jpeg') || src.endsWith('.png'));
       modalBody.innerHTML =
-        '<img class="cert-img-view" src="'+storedImg+'" alt="'+name+' certificate">' +
+        (isImg
+          ? '<img class="cert-img-view" src="'+src+'" alt="'+name+' certificate" style="width:100%;border-radius:8px;display:block;">'
+          : '<iframe src="'+src+'" style="width:100%;height:520px;border:none;border-radius:8px;" title="'+name+'"></iframe>'
+        ) +
         (adminMode
           ? '<div class="cert-admin-banner">'+
-              '<span>Replace or remove image:</span>'+
-              '<label>📎 Upload New<input type="file" accept="image/*,.pdf" id="cert-upload-input"></label>'+
-              '<button class="cert-admin-remove" id="cert-remove-btn">🗑 Remove</button>'+
+              '<span>Replace or remove:</span>'+
+              '<label>\ud83d\udcce Upload New<input type="file" accept="image/*,.pdf" id="cert-upload-input"></label>'+
+              '<button class="cert-admin-remove" id="cert-remove-btn">\ud83d\uddd1 Remove</button>'+
             '</div>'
-          : '<div class="cert-modal-upload-hint">Triple-click the section title to enter admin mode and update this image</div>'
+          : '<div class="cert-modal-upload-hint">Triple-click the section title to enter admin mode and update this certificate</div>'
         );
-    } else {
-      // Show styled certificate fallback
+      bindUploadRemove();
+    }
+
+    function renderFallback(){
       modalBody.innerHTML =
         '<div class="cert-styled">'+
-          '<div class="cert-styled-corner bl">✦</div>'+
-          '<div class="cert-styled-corner br">✦</div>'+
+          '<div class="cert-styled-corner bl">\u2726</div>'+
+          '<div class="cert-styled-corner br">\u2726</div>'+
           '<div class="cert-styled-seal">'+icon+'</div>'+
           '<div class="cert-styled-label">Certificate of Achievement</div>'+
           '<div class="cert-styled-name">'+name+'</div>'+
@@ -1320,47 +1385,24 @@ setTimeout(function(){
         '</div>'+
         (adminMode
           ? '<div class="cert-admin-banner">'+
-              '<span>📁 Upload your actual certificate:</span>'+
-              '<label>📎 Choose Image / PDF<input type="file" accept="image/*" id="cert-upload-input"></label>'+
+              '<span>\ud83d\udcc1 Upload your actual certificate:</span>'+
+              '<label>\ud83d\udcce Choose Image / PDF<input type="file" accept="image/*" id="cert-upload-input"></label>'+
             '</div>'
-          : '<div class="cert-modal-upload-hint">Triple-click "Certifications &amp; Qualifications" title to add your certificate image</div>'
+          : '<div class="cert-modal-upload-hint">Triple-click &ldquo;Certifications &amp; Qualifications&rdquo; title to add your certificate</div>'
         );
+      bindUploadRemove();
     }
 
-    // Bind upload
-    var uploadInput = document.getElementById('cert-upload-input');
-    if(uploadInput){
-      uploadInput.addEventListener('change', function(){
-        var file = this.files[0];
-        if(!file) return;
-        if(file.size > 5*1024*1024){ showToast('⚠ File too large (max 5 MB)'); return; }
-        var reader = new FileReader();
-        reader.onload = function(ev){
-          try{
-            localStorage.setItem(STORE_PREFIX + key, ev.target.result);
-            refreshCardBadges();
-            buildModal(key, icon, name, issuer);
-            showToast('✅ Certificate image saved!');
-          } catch(err){
-            showToast('⚠ Storage full — try a smaller image');
-          }
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // Bind remove
-    var removeBtn = document.getElementById('cert-remove-btn');
-    if(removeBtn){
-      removeBtn.addEventListener('click', function(){
-        localStorage.removeItem(STORE_PREFIX + key);
-        refreshCardBadges();
-        buildModal(key, icon, name, issuer);
-        showToast('🗑 Certificate image removed');
+    if(storedImg){
+      renderSrc(storedImg);
+    } else {
+      // Try certs/ folder (GitHub-hosted PDFs) first
+      checkCertExists(key, function(exists, ext){
+        if(exists) renderSrc(certFolderPath(key, ext));
+        else renderFallback();
       });
     }
   }
-
   // Click handler on cert cards
   document.querySelectorAll('.cert-card').forEach(function(card){
     card.addEventListener('click', function(){
