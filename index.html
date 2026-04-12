@@ -554,42 +554,9 @@ section:nth-child(even) { background: var(--warm); }
   border-radius: 20px; font-size: 11px;
   color: var(--navy); font-weight: 600;
 }
-.cert-modal-upload-hint {
-  margin-top: 16px; text-align: center;
-  font-size: 11px; color: var(--light);
-  font-family: 'Courier Prime', monospace; letter-spacing: .08em;
-}
 
-/* ── ADMIN upload panel ── */
-.cert-admin-banner {
-  background: var(--navy); color: #fff;
-  padding: 12px 16px; border-radius: 8px;
-  margin-top: 16px; font-size: 12px;
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-}
-.cert-admin-banner label {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,.15);
-  padding: 6px 14px; border-radius: 6px;
-  cursor: pointer; font-size: 12px; font-weight: 600;
-  transition: background .2s;
-}
-.cert-admin-banner label:hover { background: rgba(255,255,255,.25); }
-.cert-admin-banner input[type=file] { display: none; }
-.cert-admin-remove {
-  background: rgba(255,80,80,.3);
-  border: none; color: #fff; padding: 6px 14px;
-  border-radius: 6px; cursor: pointer; font-size: 12px;
-  font-family: 'Raleway', sans-serif; font-weight: 600;
-  transition: background .2s;
-}
-.cert-admin-remove:hover { background: rgba(255,80,80,.55); }
 
-/* ── CONTACT GRID (form + links) ── */
-.contact-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-  align-items: start; margin-bottom: 40px;
-}
+
 .contact-form-wrap {
   background: var(--warm); border: 1px solid var(--border);
   border-radius: 16px; padding: 32px;
@@ -1235,182 +1202,109 @@ setTimeout(function(){
 })();
 
 // ════════════════════════════════════════════
-// CERTIFICATE MODAL + IMAGE UPLOAD SYSTEM
-// Images are stored in localStorage as base64
-// Admin mode: triple-click the section title
+// CERTIFICATE MODAL
+// Loads PDFs via PDF.js (clean canvas render)
+// Images (.jpg/.png) displayed directly
 // ════════════════════════════════════════════
 (function(){
-  var backdrop  = document.getElementById('cert-modal-backdrop');
-  var closeBtn  = document.getElementById('cert-modal-close');
-  var modalTitle= document.getElementById('cert-modal-title');
-  var modalBody = document.getElementById('cert-modal-body');
-
-  var STORE_PREFIX = 'vkrs_cert_';
+  var backdrop   = document.getElementById('cert-modal-backdrop');
+  var closeBtn   = document.getElementById('cert-modal-close');
+  var modalTitle = document.getElementById('cert-modal-title');
+  var modalBody  = document.getElementById('cert-modal-body');
   var CERTS_FOLDER = './certs/';
-  var adminMode = false;
-  var clickCount = 0, clickTimer = null;
 
-  // Try pdf first, then jpg
-  function certFolderPath(key, ext){ return CERTS_FOLDER + key + (ext || '.pdf'); }
+  function certPath(key, ext){ return CERTS_FOLDER + key + ext; }
 
   function checkCertExists(key, cb){
-    // Try .pdf first, then .jpg
-    function tryExt(ext, fallbackExt){
+    function tryExt(ext, fallback){
       var xhr = new XMLHttpRequest();
-      xhr.open('HEAD', certFolderPath(key, ext), true);
-      xhr.onload = function(){
-        if(xhr.status === 200){ cb(true, ext); }
-        else if(fallbackExt){ tryExt(fallbackExt, null); }
-        else { cb(false, null); }
-      };
-      xhr.onerror = function(){
-        if(fallbackExt){ tryExt(fallbackExt, null); }
-        else { cb(false, null); }
-      };
+      xhr.open('HEAD', certPath(key, ext), true);
+      xhr.onload  = function(){ if(xhr.status===200) cb(ext); else if(fallback) tryExt(fallback,null); else cb(null); };
+      xhr.onerror = function(){ if(fallback) tryExt(fallback,null); else cb(null); };
       xhr.send();
     }
     tryExt('.pdf', '.jpg');
   }
 
-  // Mark cards that already have images (localStorage OR certs/ folder)
-  function refreshCardBadges(){
-    document.querySelectorAll('.cert-card').forEach(function(card){
-      var key = card.dataset.certKey;
-      if(localStorage.getItem(STORE_PREFIX + key)){
-        card.classList.add('cert-has-image');
-      } else {
-        checkCertExists(key, function(exists){
-          if(exists) card.classList.add('cert-has-image');
-          else card.classList.remove('cert-has-image');
-        });
-      }
+  // Badge cards that have a cert file
+  document.querySelectorAll('.cert-card').forEach(function(card){
+    checkCertExists(card.dataset.certKey, function(ext){
+      if(ext) card.classList.add('cert-has-image');
     });
-  }
-  refreshCardBadges();
+  });
 
-  // Triple-click the section title to toggle admin mode
-  var secTitle = document.querySelector('#certifications .sec-title');
-  if(secTitle){
-    secTitle.style.cursor = 'default';
-    secTitle.addEventListener('click', function(){
-      clickCount++;
-      clearTimeout(clickTimer);
-      clickTimer = setTimeout(function(){ clickCount = 0; }, 600);
-      if(clickCount >= 3){
-        clickCount = 0;
-        adminMode = !adminMode;
-        secTitle.style.outline = adminMode ? '2px dashed var(--navy)' : 'none';
-        secTitle.title = adminMode ? 'Admin mode ON — click any cert to upload image' : '';
-        // Show toast
-        showToast(adminMode ? '🔒 Admin mode ON — click a cert to upload your image' : '🔓 Admin mode OFF');
-      }
-    });
-  }
+  // Render PDF cleanly with PDF.js onto a canvas
+  function renderPDF(src){
+    modalBody.innerHTML =
+      '<div id="pdf-wrap" style="width:100%;overflow-y:auto;max-height:600px;border-radius:8px;background:#f4f4f4;text-align:center;">' +
+        '<canvas id="pdf-canvas" style="max-width:100%;border-radius:6px;display:inline-block;"></canvas>' +
+      '</div>';
 
-  // Toast notification
-  function showToast(msg){
-    var t = document.createElement('div');
-    t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 22px;border-radius:8px;font-size:13px;font-family:Raleway,sans-serif;z-index:9999;pointer-events:none;white-space:nowrap;box-shadow:0 8px 24px rgba(13,27,42,.25);';
-    t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .4s'; setTimeout(function(){t.remove();},400); }, 2800);
-  }
-
-  // Build modal HTML — loads from certs/ folder (GitHub PDFs) or localStorage
-  function buildModal(key, icon, name, issuer){
-    var storedImg = localStorage.getItem(STORE_PREFIX + key);
-    modalTitle.textContent = name;
-
-    function bindUploadRemove(){
-      var uploadInput = document.getElementById('cert-upload-input');
-      if(uploadInput){
-        uploadInput.addEventListener('change', function(){
-          var file = this.files[0];
-          if(!file) return;
-          if(file.size > 5*1024*1024){ showToast('\u26a0 File too large (max 5 MB)'); return; }
-          var reader = new FileReader();
-          reader.onload = function(ev){
-            try{
-              localStorage.setItem(STORE_PREFIX + key, ev.target.result);
-              refreshCardBadges();
-              buildModal(key, icon, name, issuer);
-              showToast('\u2705 Certificate image saved!');
-            } catch(err){
-              showToast('\u26a0 Storage full \u2014 try a smaller image');
-            }
-          };
-          reader.readAsDataURL(file);
+    var script = document.getElementById('pdfjs-script');
+    function doRender(){
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      pdfjsLib.getDocument(src).promise.then(function(pdf){
+        pdf.getPage(1).then(function(page){
+          var wrap  = document.getElementById('pdf-wrap');
+          var canvas= document.getElementById('pdf-canvas');
+          if(!wrap || !canvas) return;
+          var maxW  = wrap.clientWidth || 780;
+          var vp0   = page.getViewport({scale:1});
+          var scale = maxW / vp0.width;
+          var vp    = page.getViewport({scale: scale});
+          var ctx   = canvas.getContext('2d');
+          canvas.width  = vp.width;
+          canvas.height = vp.height;
+          page.render({canvasContext: ctx, viewport: vp});
         });
-      }
-      var removeBtn = document.getElementById('cert-remove-btn');
-      if(removeBtn){
-        removeBtn.addEventListener('click', function(){
-          localStorage.removeItem(STORE_PREFIX + key);
-          refreshCardBadges();
-          buildModal(key, icon, name, issuer);
-          showToast('\ud83d\uddd1 Certificate image removed');
-        });
-      }
-    }
-
-    function renderSrc(src){
-      var isImg = src && (src.endsWith('.jpg') || src.endsWith('.jpeg') || src.endsWith('.png'));
-      modalBody.innerHTML =
-        (isImg
-          ? '<img class="cert-img-view" src="'+src+'" alt="'+name+' certificate" style="width:100%;border-radius:8px;display:block;max-height:600px;object-fit:contain;">'
-          : '<object data="'+src+'" type="application/pdf" style="width:100%;height:580px;border:none;border-radius:8px;display:block;"><p style="text-align:center;padding:20px;">Cannot display PDF. <a href="'+src+'" target="_blank" style="color:var(--navy);font-weight:600;">Open certificate in new tab ↗</a></p></object>'
-        ) +
-        (adminMode
-          ? '<div class="cert-admin-banner">'+
-              '<span>Replace or remove:</span>'+
-              '<label>\ud83d\udcce Upload New<input type="file" accept="image/*,.pdf" id="cert-upload-input"></label>'+
-              '<button class="cert-admin-remove" id="cert-remove-btn">\ud83d\uddd1 Remove</button>'+
-            '</div>'
-          : '<div class="cert-modal-upload-hint">Triple-click the section title to enter admin mode and update this certificate</div>'
-        );
-      bindUploadRemove();
-    }
-
-    function renderFallback(){
-      modalBody.innerHTML =
-        '<div class="cert-styled">'+
-          '<div class="cert-styled-corner bl">\u2726</div>'+
-          '<div class="cert-styled-corner br">\u2726</div>'+
-          '<div class="cert-styled-seal">'+icon+'</div>'+
-          '<div class="cert-styled-label">Certificate of Achievement</div>'+
-          '<div class="cert-styled-name">'+name+'</div>'+
-          '<div class="cert-styled-divider"></div>'+
-          '<div class="cert-styled-holder">This certifies that<strong>Vinay Kumar Reddy Sirigireddy</strong></div>'+
-          '<div class="cert-styled-issuer-row">Awarded by <span class="cert-styled-issuer-badge">'+issuer+'</span></div>'+
-        '</div>'+
-        (adminMode
-          ? '<div class="cert-admin-banner">'+
-              '<span>\ud83d\udcc1 Upload your actual certificate:</span>'+
-              '<label>\ud83d\udcce Choose Image / PDF<input type="file" accept="image/*" id="cert-upload-input"></label>'+
-            '</div>'
-          : '<div class="cert-modal-upload-hint">Triple-click &ldquo;Certifications &amp; Qualifications&rdquo; title to add your certificate</div>'
-        );
-      bindUploadRemove();
-    }
-
-    if(storedImg){
-      renderSrc(storedImg);
-    } else {
-      // Try certs/ folder (GitHub-hosted PDFs) first
-      checkCertExists(key, function(exists, ext){
-        if(exists) renderSrc(certFolderPath(key, ext));
-        else renderFallback();
+      }).catch(function(){
+        var wrap = document.getElementById('pdf-wrap');
+        if(wrap) wrap.innerHTML = '<p style="padding:24px;color:#555;">Could not render PDF. <a href="'+src+'" target="_blank" style="color:var(--navy);font-weight:600;">Open in new tab ↗</a></p>';
       });
     }
+    if(window.pdfjsLib){ doRender(); }
+    else {
+      var s = document.createElement('script');
+      s.id  = 'pdfjs-script';
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+      s.onload = doRender;
+      document.head.appendChild(s);
+    }
   }
-  // Click handler on cert cards
+
+  function renderImg(src, name){
+    modalBody.innerHTML =
+      '<img src="'+src+'" alt="'+name+'" style="width:100%;max-height:620px;object-fit:contain;border-radius:8px;display:block;">';
+  }
+
+  function renderFallback(icon, name, issuer){
+    modalBody.innerHTML =
+      '<div class="cert-styled">'+
+        '<div class="cert-styled-corner bl">✦</div>'+
+        '<div class="cert-styled-corner br">✦</div>'+
+        '<div class="cert-styled-seal">'+icon+'</div>'+
+        '<div class="cert-styled-label">Certificate of Achievement</div>'+
+        '<div class="cert-styled-name">'+name+'</div>'+
+        '<div class="cert-styled-divider"></div>'+
+        '<div class="cert-styled-holder">This certifies that<strong>Vinay Kumar Reddy Sirigireddy</strong></div>'+
+        '<div class="cert-styled-issuer-row">Awarded by <span class="cert-styled-issuer-badge">'+issuer+'</span></div>'+
+      '</div>';
+  }
+
+  function buildModal(key, icon, name, issuer){
+    modalTitle.textContent = name;
+    modalBody.innerHTML = '<p style="text-align:center;padding:32px;color:var(--mid);">Loading…</p>';
+    checkCertExists(key, function(ext){
+      if(!ext){ renderFallback(icon, name, issuer); return; }
+      var src = certPath(key, ext);
+      if(ext === '.pdf') renderPDF(src);
+      else               renderImg(src, name);
+    });
+  }
+
   document.querySelectorAll('.cert-card').forEach(function(card){
     card.addEventListener('click', function(){
-      var key    = this.dataset.certKey;
-      var icon   = this.dataset.certIcon;
-      var name   = this.dataset.certName;
-      var issuer = this.dataset.certIssuer;
-      buildModal(key, icon, name, issuer);
+      buildModal(this.dataset.certKey, this.dataset.certIcon, this.dataset.certName, this.dataset.certIssuer);
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
     });
@@ -1421,8 +1315,8 @@ setTimeout(function(){
     document.body.style.overflow = '';
   }
   closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', function(e){ if(e.target === backdrop) closeModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+  backdrop.addEventListener('click', function(e){ if(e.target===backdrop) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 })();
 
 // ════════════════════════════════════════════
