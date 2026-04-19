@@ -1084,7 +1084,7 @@ section:nth-child(even) { background: var(--warm); }
         <a id="email-lnk" class="contact-link" href="#"><span>✉</span><span id="email-txt">Email</span></a>
         <a href="tel:9375163412" class="contact-link"><span>📞</span>(937) 516-3412</a>
         <a href="https://www.linkedin.com/in/vinay-kumar-reddy-sirigireddy-ba98a82ba" target="_blank" class="contact-link"><span>🔗</span>LinkedIn Profile</a>
-        <a href="https://vinay25112001.github.io/evtol-sizing-app-Wright-State-University/" target="_blank" class="contact-link"><span>🚀</span>Live eVTOL Tool</a>
+        <a href="https://evtolsizer.live/" target="_blank" class="contact-link"><span>🚀</span>Live eVTOL Tool</a>
         <a href="./Vinay_Kumar_Reddy_Sirigireddy_Resume.pdf" download class="contact-link"><span>↓</span>Download Resume</a>
       </div>
     </div>
@@ -1240,6 +1240,47 @@ setTimeout(function(){
         '<canvas id="pdf-canvas" style="max-width:100%;border-radius:6px;display:inline-block;"></canvas>' +
       '</div>';
 
+    function doRender(){
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      pdfjsLib.getDocument(src).promise.then(function(pdf){
+        pdf.getPage(1).then(function(page){
+          var wrap   = document.getElementById('pdf-wrap');
+          var canvas = document.getElementById('pdf-canvas');
+          if(!wrap || !canvas) return;
+
+          var maxW   = wrap.clientWidth || 780;
+          var DPI_SCALE = 300 / 72; // 300 DPI vs PDF's default 72 DPI = ~4.17×
+          var vp0    = page.getViewport({scale: 1});
+          var fitScale = maxW / vp0.width;           // scale to fill modal width
+          var renderScale = fitScale * DPI_SCALE;    // render at 300 DPI sharpness
+
+          var vp     = page.getViewport({scale: renderScale});
+          var ctx    = canvas.getContext('2d');
+
+          // Canvas is large (300 DPI), but CSS shrinks it back to fit the modal
+          canvas.width  = vp.width;
+          canvas.height = vp.height;
+          canvas.style.width  = (vp.width  / DPI_SCALE) + 'px';
+          canvas.style.height = (vp.height / DPI_SCALE) + 'px';
+
+          page.render({canvasContext: ctx, viewport: vp});
+        });
+      }).catch(function(){
+        var wrap = document.getElementById('pdf-wrap');
+        if(wrap) wrap.innerHTML = '<p style="padding:24px;color:#555;">Could not render PDF. <a href="'+src+'" target="_blank" style="color:var(--navy);font-weight:600;">Open in new tab ↗</a></p>';
+      });
+    }
+
+    if(window.pdfjsLib){ doRender(); }
+    else {
+      var s = document.createElement('script');
+      s.id  = 'pdfjs-script';
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+      s.onload = doRender;
+      document.head.appendChild(s);
+    }
+  }
+
     var script = document.getElementById('pdfjs-script');
     function doRender(){
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -1274,7 +1315,7 @@ setTimeout(function(){
 
   function renderImg(src, name){
     modalBody.innerHTML =
-      '<img src="'+src+'" alt="'+name+'" style="width:100%;max-height:620px;object-fit:contain;border-radius:8px;display:block;">';
+      '<img src="'+src+'" alt="'+name+'" style="width:100%;max-height:620px;object-fit:contain;border-radius:8px;display:block;image-rendering:high-quality;image-rendering:-webkit-optimize-contrast;">';
   }
 
   function renderFallback(icon, name, issuer){
