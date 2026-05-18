@@ -341,7 +341,7 @@ section:nth-child(even) { background: var(--warm); }
 /* ── PROJECTS ── */
 .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .project-card { padding: 26px; }
-.project-card.featured { grid-column: span 2; }
+.project-card.featured { grid-column: 1 / -1; }
 .proj-num {
   font-family: 'Courier Prime', monospace;
   font-size: 10px; color: var(--light);
@@ -939,7 +939,7 @@ section:nth-child(even) { background: var(--warm); }
       <div class="proj-num">PROJECT 01  ·  evtolsizer.live</div>
       <div class="proj-title">MBSE-Integrated eVTOL Sizing Framework &amp; Browser-Based Design Tool</div>
       <div class="proj-desc">Derived a physics-validated sizing engine in MATLAB — covering actuator disk hover power, BEM-approximated rotor performance, and ISA atmospheric corrections — then deployed it as a live web application. The MTOW sizing loop converges within ±5% of three published reference eVTOL aircraft. Linked to CATIA Magic SysML for real-time Technical Performance Measure tracking across design iterations.</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;">
         <div style="border:1px solid var(--border);border-radius:8px;padding:16px;background:var(--warm);">
           <div style="font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:.2em;color:var(--navy);text-transform:uppercase;margin-bottom:10px;">Physics Engine</div>
           <ul style="list-style:none;font-size:12px;color:var(--mid);line-height:2.1;">
@@ -958,6 +958,16 @@ section:nth-child(even) { background: var(--warm); }
             <li>— Full metric / imperial unit toggle across all tabs &amp; charts</li>
             <li>— W&amp;B envelope chart via Recharts with CG excursion bounds</li>
             <li>— PDF report: sizing inputs + computed outputs + equations</li>
+          </ul>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:8px;padding:16px;background:var(--warm);">
+          <div style="font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:.2em;color:var(--navy);text-transform:uppercase;margin-bottom:10px;">Validation &amp; Outputs</div>
+          <ul style="list-style:none;font-size:12px;color:var(--mid);line-height:2.1;">
+            <li>— MTOW convergence: ±5% vs. 3 reference eVTOL aircraft</li>
+            <li>— OpenVSP geometry export from sizing parameters</li>
+            <li>— CATIA Magic SysML TPM tracking across iterations</li>
+            <li>— AIAA Journal of Aircraft manuscript in preparation</li>
+            <li>— Deployed live: GitHub Pages, zero-install browser tool</li>
           </ul>
         </div>
       </div>
